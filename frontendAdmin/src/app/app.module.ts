@@ -36,13 +36,10 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { FancyactivitiesComponent } from './fancyactivities/fancyactivities.component';
 import { RemoveNegativeSignDirective } from './unless.directive';
 import { ApiWhitelistComponent } from './api-whitelist/api-whitelist.component';
-<<<<<<< HEAD
 import { MarketlistComponent } from './marketlist/marketlist.component';
-=======
 import { CricketlistComponent } from './cricketlist/cricketlist.component';
 import { TennislistComponent } from './tennislist/tennislist.component';
 import { SoccerlistComponent } from './soccerlist/soccerlist.component';
->>>>>>> 8e7d3bab42d4ba33b7d594ff5bf6e008932a9806
 const config: SocketIoConfig = { url: 'http://localhost:7766', options: {} };
 @NgModule({
   declarations: [
@@ -75,13 +72,10 @@ const config: SocketIoConfig = { url: 'http://localhost:7766', options: {} };
     SearchFilterPipe,
     RemoveNegativeSignDirective,
     ApiWhitelistComponent,
-<<<<<<< HEAD
-    MarketlistComponent
-=======
+    MarketlistComponent,
     CricketlistComponent,
     TennislistComponent,
     SoccerlistComponent
->>>>>>> 8e7d3bab42d4ba33b7d594ff5bf6e008932a9806
   ],
   imports: [
     BrowserModule,
