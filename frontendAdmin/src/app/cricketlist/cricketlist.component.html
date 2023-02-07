@@ -1,0 +1,26 @@
+<app-navigation></app-navigation>
+<div class="main">
+  <h3 class="head">Cricket <small class="eventCount">Total Events: {{totalEvents}}</small></h3>
+<table>
+  <tr class="table-header">
+      <th scope="col">#</th>
+      <th scope="col">CMPT ID</th>
+      <th scope="col">CMPT NAME</th>
+      <th scope="col">CMPT REGION</th>
+      <th scope="col">SPORT NAME</th>
+      <th scope="col">EVENT COUNT</th>
+      <th scope="col">MKT COUNT</th>
+      <th scope="col">ACTION</th>
+  </tr>
+  <tr *ngFor="let item of matchesData;let i=index;">
+      <td>{{i+1}}</td>
+      <td>{{item['competition_id']}}</td>
+      <td>{{item['name']}}</td>
+      <td style="text-align: center;"><span class="badge badge-pill" style="padding-top:10px;padding-bottom:10px;padding-left:15px;padding-right:15px;font-size:12px;border:1px solid #31708f">{{item['competitionRegion']}}</span></td>
+      <td>Cricket</td>
+      <td>{{item['eventCount']}}</td>
+      <td>{{item['marketCount']}}</td>
+      <td><button type="button" class="showEvents">Show Events</button></td>
+  </tr>
+</table>
+</div>
