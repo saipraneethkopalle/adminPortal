@@ -5,14 +5,14 @@
                 <th scope="col">#</th>
                 <th scope="col">EVENTID/EVENT NAME</th>
                 <th scope="col">MARKET ID</th>
-                <th scope="col">MKT NAME</th>
+                <th scope="col" >MKT NAME</th>
             </tr>
             <tr>
                 <tr style="overflow-x: auto;"  *ngFor="let item of marketData;let i= index">
                     <td >{{i+1}}</td>
                     <td style="text-align:center;"> {{id}} <br> {{eventName}} </td>
                     <td>{{item.market_id}}</td>
-                    <td>{{item.market_name}}</td>
+                    <td style="text-align: center;"> <span class="badge badge-pill badge-primary" style="padding:10px;font-size:12px;">{{item['market_name']}}</span></td>
             </tr>
     
         </table>
