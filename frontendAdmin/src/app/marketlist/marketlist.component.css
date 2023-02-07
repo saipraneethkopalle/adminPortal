@@ -70,6 +70,7 @@ td{
     border: 1px solid rgb(175, 175, 175);
     padding: 15px 15px;
     z-index: 1020;
+    text-align: center;
 }
 
 tr:nth-child(even){
