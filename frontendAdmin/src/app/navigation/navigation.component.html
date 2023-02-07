@@ -53,9 +53,19 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/whitelist" routerLinkActive="active">Whitelist</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/apiwhiteList" routerLinkActive="active">API Whitelist</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" routerLinkActive="active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Betfair
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/addManualCricket" routerLinkActive="active" style="color:#212121;">Cricket</a>
+          <a class="dropdown-item" routerLink="/addManualTennis" routerLinkActive="active" style="color:#212121;">Tennis</a>
+          <a class="dropdown-item" routerLink="/addManualSoccer" routerLinkActive="active" style="color:#212121;">Soccer</a>
+        </div>
       </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/apiwhiteList" routerLinkActive="active">API Whitelist</a>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" routerLink="/userlist" routerLinkActive="active">User List</a>
       </li>

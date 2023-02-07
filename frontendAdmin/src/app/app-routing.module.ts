@@ -25,6 +25,9 @@ import { SetlimitComponent } from './setlimit/setlimit.component';
 import { ShowactivitiesComponent } from './showactivities/showactivities.component';
 import { FancyactivitiesComponent } from './fancyactivities/fancyactivities.component';
 import { ApiWhitelistComponent } from './api-whitelist/api-whitelist.component';
+import { CricketlistComponent } from './cricketlist/cricketlist.component';
+import { TennislistComponent } from './tennislist/tennislist.component';
+import { SoccerlistComponent } from './soccerlist/soccerlist.component';
 
 
 const routes: Routes = [
@@ -52,7 +55,10 @@ const routes: Routes = [
   {path:`setlimit/:id`,component:SetlimitComponent},
   {path:`match-activities/:id`,component:ShowactivitiesComponent},
   {path:`fancyactivities/:id/:selectionid`,component:FancyactivitiesComponent},
-  {path:'apiwhiteList',component:ApiWhitelistComponent}
+  {path:'apiwhiteList',component:ApiWhitelistComponent},
+  {path:'cricketlist',component:CricketlistComponent},
+  {path:'tennislist',component:TennislistComponent},
+  {path:'soccerlist',component:SoccerlistComponent},
 ];
 
 @NgModule({
