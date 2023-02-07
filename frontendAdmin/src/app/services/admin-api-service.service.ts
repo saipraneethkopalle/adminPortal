@@ -524,5 +524,10 @@ getMatchSettings() {
   return this.http.get(url,{headers:this.headers})
 
 }
+getMarketData(id:any) {
+  const url = `http://178.79.154.77/test/api/listmarket.php?id=32075199`
+  return this.http.get(url)
+
+}
 }
 

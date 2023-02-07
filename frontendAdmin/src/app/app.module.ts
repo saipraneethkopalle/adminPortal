@@ -36,6 +36,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { FancyactivitiesComponent } from './fancyactivities/fancyactivities.component';
 import { RemoveNegativeSignDirective } from './unless.directive';
 import { ApiWhitelistComponent } from './api-whitelist/api-whitelist.component';
+import { MarketlistComponent } from './marketlist/marketlist.component';
 import { CricketlistComponent } from './cricketlist/cricketlist.component';
 import { TennislistComponent } from './tennislist/tennislist.component';
 import { SoccerlistComponent } from './soccerlist/soccerlist.component';
@@ -72,6 +73,7 @@ const config: SocketIoConfig = { url: 'http://localhost:7766', options: {} };
     SearchFilterPipe,
     RemoveNegativeSignDirective,
     ApiWhitelistComponent,
+    MarketlistComponent,
     CricketlistComponent,
     TennislistComponent,
     SoccerlistComponent,
