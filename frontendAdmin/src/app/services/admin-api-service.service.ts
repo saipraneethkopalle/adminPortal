@@ -358,7 +358,14 @@ export class AdminApiServiceService {
     return this.http.get(url,{headers:this.headers})
 
   }
-
+getCmpt(id:any){
+  const url = 'http://178.79.154.77/test/api/listcompetition.php?id='+id;
+  return this.http.get(url)
+}
+getEventsCount(id:any){
+  const url = 'http://178.79.154.77/test/api/allevent.php?id='+id;
+  return this.http.get(url)
+}
 getUpdateFancyListner() {
   return this.fancyUpdated.asObservable();
 }
@@ -441,7 +448,7 @@ setFancy1Result(input:any, eventId:any, selectionId:any, name:any,createdBy:any)
 setResultRollback(eventId:any, selectionId:any) { // use
   let data = { id: selectionId, eventId,createdBy:this.user };
   const data1 = `?fancyid=${selectionId}`;
-  // data['createdBy'] = this.user  
+  // data['createdBy'] = this.user
   const response1 = this.http.post(this.link + '/api/v1/rollbackFancy', data,{headers:this.headers});
 
   // const domain = this.userService.getDomain();
