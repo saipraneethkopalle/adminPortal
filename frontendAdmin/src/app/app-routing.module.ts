@@ -28,6 +28,7 @@ import { ApiWhitelistComponent } from './api-whitelist/api-whitelist.component';
 import { CricketlistComponent } from './cricketlist/cricketlist.component';
 import { TennislistComponent } from './tennislist/tennislist.component';
 import { SoccerlistComponent } from './soccerlist/soccerlist.component';
+import { ShowEventsComponent } from './show-events/show-events.component';
 
 
 const routes: Routes = [
@@ -59,6 +60,7 @@ const routes: Routes = [
   {path:'cricketlist',component:CricketlistComponent},
   {path:'tennislist',component:TennislistComponent},
   {path:'soccerlist',component:SoccerlistComponent},
+  {path:'showEvents/:id',component:ShowEventsComponent}
 ];
 
 @NgModule({

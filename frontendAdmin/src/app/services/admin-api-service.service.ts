@@ -362,6 +362,10 @@ getCmpt(id:any){
   const url = 'http://178.79.154.77/test/api/listcompetition.php?id='+id;
   return this.http.get(url)
 }
+getEventsById(id:any){
+  const url = 'http://178.79.154.77/test/api/listevent.php?id='+id;
+  return this.http.get(url)
+}
 getEventsCount(id:any){
   const url = 'http://178.79.154.77/test/api/allevent.php?id='+id;
   return this.http.get(url)

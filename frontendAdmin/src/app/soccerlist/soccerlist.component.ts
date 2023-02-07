@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminApiServiceService } from '../services/admin-api-service.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-soccerlist',
@@ -9,7 +11,7 @@ import { AdminApiServiceService } from '../services/admin-api-service.service';
 export class SoccerlistComponent implements OnInit {
   matchesData:any;
   totalEvents:any;
-  constructor(private apiService:AdminApiServiceService) { }
+  constructor(private apiService:AdminApiServiceService,private router:Router) { }
 
   ngOnInit(): void {
     this.getCmptlist()
@@ -25,5 +27,8 @@ export class SoccerlistComponent implements OnInit {
       this.matchesData = res.result;
     });
   }
-
+  showEvents(item:any){
+    localStorage.setItem("sportName","Soccer");
+    this.router.navigate(["/showEvents/"+item.competition_id])
+  }
 }

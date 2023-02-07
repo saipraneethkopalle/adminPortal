@@ -1,0 +1,45 @@
+<app-navigation></app-navigation>
+<div class="main">
+    <h2 class="head">Events</h2>
+    <table>
+        <thead>
+            <tr class="table-header">
+                <th scope="col">#</th>
+                <th scope="col">EVENTID/MKTID</th>
+                <th scope="col">EVENT NAME</th>
+                <th scope="col">CMPTID/NAME</th>
+                <th scope="col">OPEN DATE</th>
+                <th scope="col">SPORT NAME</th>
+                <th scope="col">MKT COUNT</th>
+                <th scope="col">ACTION</th>
+            </tr>
+        </thead>
+       <tbody>
+        <tr *ngFor="let item of eventData;let i=index;">
+            <td>{{i + 1}}</td>
+            <td>
+                {{item.event_id}}
+                <br>
+                {{item.market_id}}                
+            </td>
+            <td>
+                {{item.event_name}}
+            </td>
+            <td >
+                {{item.competition_id}}
+                <br>
+                <span class="badge bg-primary">{{item.competition_name}}</span>
+            </td>
+            <td>{{item.open_date}}</td>
+            <td>
+                <span class="badge rounded-pill badge-light-primary me-1"></span>
+                {{sportName}}
+            </td>
+            <td>15</td>
+            <td>
+                <button type="button" class="showMarket">Show <br> Market</button>
+            </td>
+        </tr>
+       </tbody>
+    </table>
+</div>

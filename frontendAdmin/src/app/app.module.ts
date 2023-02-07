@@ -39,6 +39,7 @@ import { ApiWhitelistComponent } from './api-whitelist/api-whitelist.component';
 import { CricketlistComponent } from './cricketlist/cricketlist.component';
 import { TennislistComponent } from './tennislist/tennislist.component';
 import { SoccerlistComponent } from './soccerlist/soccerlist.component';
+import { ShowEventsComponent } from './show-events/show-events.component';
 const config: SocketIoConfig = { url: 'http://localhost:7766', options: {} };
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ const config: SocketIoConfig = { url: 'http://localhost:7766', options: {} };
     ApiWhitelistComponent,
     CricketlistComponent,
     TennislistComponent,
-    SoccerlistComponent
+    SoccerlistComponent,
+    ShowEventsComponent
   ],
   imports: [
     BrowserModule,
