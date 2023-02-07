@@ -363,7 +363,7 @@ getCmpt(id:any){
   return this.http.get(url)
 }
 getEventsCount(id:any){
-  const url = 'http://178.79.154.77/test/api/allevent.php?id='+id;
+  const url = 'http://178.79.154.77/test/api/allevent.php?id=4';
   return this.http.get(url)
 }
 getUpdateFancyListner() {
