@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class ShowEventsComponent implements OnInit {
   eventData:any;
   sportName:any;
+  eventId:any
   constructor(private apiService:AdminApiServiceService,private router:Router) { }
 
   ngOnInit(): void {
@@ -20,5 +21,9 @@ export class ShowEventsComponent implements OnInit {
     this.apiService.getEventsById(id).subscribe((res:any)=>{
       this.eventData = res.result;
     })
+  }
+  redirect(eid:any,ename:any) {
+    localStorage.setItem('eventName',ename)
+    this.router.navigate(['/listmarket',eid])
   }
 }

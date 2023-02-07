@@ -58,7 +58,7 @@ const routes: Routes = [
   {path:`match-activities/:id`,component:ShowactivitiesComponent},
   {path:`fancyactivities/:id/:selectionid`,component:FancyactivitiesComponent},
   {path:'apiwhiteList',component:ApiWhitelistComponent},
-  {path:'listmarket',component:MarketlistComponent},
+  {path:'listmarket/:id',component:MarketlistComponent},
   {path:'cricketlist',component:CricketlistComponent},
   {path:'tennislist',component:TennislistComponent},
   {path:'soccerlist',component:SoccerlistComponent},

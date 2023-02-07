@@ -14,7 +14,9 @@ export class MarketlistComponent implements OnInit {
   constructor(private route:ActivatedRoute, private apiService:AdminApiServiceService) { }
 
   ngOnInit(): void {
+    this.eventName = localStorage.getItem('eventName')
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
+
       if (paramMap.has('id')) {
         this.id = paramMap.get('id');
         }});
