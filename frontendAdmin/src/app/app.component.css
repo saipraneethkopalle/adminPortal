@@ -1,0 +1,22 @@
+*{
+  font-family: sans-serif;
+  background-color:#e6e6e1;
+}
+nav{
+  background-color: #31708f;
+
+}
+nav a{
+  font-size: 14px;
+  margin-right:5px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+nav a:hover{
+  color:white;
+}
+.active{
+  font-weight: bold;
+}
+

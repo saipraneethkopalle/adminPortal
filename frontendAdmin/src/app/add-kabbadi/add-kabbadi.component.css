@@ -1,0 +1,14 @@
+.card{
+  margin-top:10px;
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
+  height:auto;
+  overflow: hidden;
+}
+.btn{
+  background-color:#31708f;
+}
+.bg-header{
+  background-color:#31708f;
+}

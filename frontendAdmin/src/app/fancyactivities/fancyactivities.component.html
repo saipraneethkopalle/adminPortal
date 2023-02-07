@@ -1,0 +1,36 @@
+<app-navigation></app-navigation>
+<div class="container">
+    <div  class="row">
+       <div class="col-lg-12 col-md-12 col-xs-12">
+          <div class="col-md-9 col-xs-9 mgb-10"><br>
+             <h2>Fancy Activities List</h2>
+          </div>
+          <div class="col-md-12 col-xs-12">
+             <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                   <thead>
+                      <tr>
+                         <th class="center pd1p">#</th>
+                         <th>Event ID</th>
+                         <th>Activities</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      <tr *ngFor="let data of fancyActivities; let i = index">
+                         <td class="center pd1p">{{ i+1 }}</td>
+                         <td>{{ data.eventId }}</td>
+                         <td *ngIf="data.value == 'Add'">Match Added By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                         <td *ngIf="data.type2 == 'Fancy'">Fancy Set To {{ data.value }} By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                         <td *ngIf="data.type2 == 'Score'">Score Type Set To {{ data.value }} By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                         <td *ngIf="data.type2 == 'Odds'">Odds Set To {{ data.value }} By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                         <td *ngIf="data.type2 == 'Result'">Match Winner Set To {{ data.value }} By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a'}}</td>
+                         <td *ngIf="data.type1 == 'Fancy' && data.value!='Closed'">Fancy {{ data.result }} {{ data.value }} From {{ data.type2 }} Source By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a'  }}</td>
+                         <td *ngIf="data.type1 == 'Fancy' && data.value=='Closed'">Fancy {{ data.result }} {{ data.value }} at {{ data.result1 }} From {{ data.type2 }} Source By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                      </tr>
+                   </tbody>
+                </table>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

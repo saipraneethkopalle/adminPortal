@@ -1,0 +1,35 @@
+.table{
+  display:block;
+  font-size:16px;
+  padding:15px;
+  width:100%;
+}
+#messageBox{
+  width:400px;
+  height:200px;
+  font-size:16px;
+  float:right;
+}
+td{
+  width:50%;
+}
+.card{
+  color: black;
+  margin: auto;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 48.7%;
+  margin-top: 18px;
+  text-align: center;
+  height:auto;
+  overflow: hidden;
+}
+
+.card-header{
+font-size: 14px;
+color: rgb(48, 46, 46);
+margin: 0;
+text-align: left;
+}
+.bg-header{
+  background-color:#31708f;
+}

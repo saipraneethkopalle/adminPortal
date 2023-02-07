@@ -1,0 +1,65 @@
+<app-navigation></app-navigation>
+<div class="main">
+  <h4>Set Limit</h4>
+  <div class="sub-block">
+    <div class="selectweb">
+      <b id="select" style="float:left;margin-right:15px;padding-top:5px;">SELECT WEBSITE</b>
+      <select class="form-control" style="float:left;" >
+      <option value="item['name']" *ngFor="let item of weblist;let i=index;">{{item['name']}}</option>
+
+    </select>
+  </div>
+  <form method="post" [formGroup]="addSetLimit" (ngSubmit)="addSetLimitForm()" autocomplete="off">
+  <div class="block1">
+    <h4>Set Auto Odds Min Max</h4>
+    <table class="table">
+      <tr>
+        <td>Min</td>
+        <td>Max</td>
+        <td>Profit/Loss</td>
+      </tr>
+      <tr>
+        <td><input type="number" min="0" value="100" class="form-control" id="min" formControlName="odds_min" appRemoveNegativeSign></td>
+        <td><input type="number" min="0" value="1000" class="form-control" id="max" formControlName="odds_max" appRemoveNegativeSign></td>
+        <td><input type="number" min="0" value="10000" class="form-control" id="profitloss" formControlName="odds_profitloss" appRemoveNegativeSign></td>
+      </tr>
+    </table>
+  </div>
+  <div class="block2">
+    <h4>Set Book Maker Min Max</h4>
+    <table class="table">
+      <tr class="heading">
+        <td>Min</td>
+        <td>Max</td>
+        <td>Profit/Loss</td>
+      </tr>
+      <tr class="heading">
+        <td><input type="number" min="0" value="500" class="form-control" id="min" formControlName="bookmaker_min" appRemoveNegativeSign></td>
+        <td><input type="number" min="0" value="5000" class="form-control" id="max" formControlName="bookmaker_max" appRemoveNegativeSign></td>
+        <td><input type="number" min="0" value="50000" class="form-control" id="profitloss" formControlName="bookmaker_profitloss" appRemoveNegativeSign></td>
+      </tr>
+    </table>
+  </div>
+  <div class="block3">
+    <h4>Set Fancy Min Max</h4>
+    <table class="table">
+      <tr>
+        <td>Min</td>
+        <td>Max</td>
+        <td>Profit/Loss</td>
+      </tr>
+      <tr>
+        <td><input type="number" min="0" value="600" class="form-control" id="min" formControlName="fancy_min" appRemoveNegativeSign></td>
+        <td><input type="number" min="0" value="6000" class="form-control" id="max" formControlName="fancy_max" appRemoveNegativeSign></td>
+        <td><input type="number" min="0" value="60000" class="form-control" id="profitloss" formControlName="fancy_profitloss" appRemoveNegativeSign></td>
+      </tr>
+    </table>
+  </div>
+  <table>
+    <tr><td></td><td><button type="submit" class="btn btn-success"  style="width:250px;text-align:center;font-size:14px;">SET LIMIT</button></td><td></td>
+    </tr>
+  </table>
+  </form>
+  </div>
+
+</div>

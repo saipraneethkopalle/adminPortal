@@ -1,0 +1,22 @@
+<app-navigation></app-navigation>
+<div class="card">
+  <div class="card-header bg-header text-white">Whitelist Domain</div>
+  <div class="card-body">
+    <form [formGroup]="addApilist" method="post" autocomplete="off" >
+      <table id="domform"><tr>
+        <td><label for="url">url:</label></td>
+        <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" placeholder="Enter url" formControlName="url"></td>
+
+     <td><button type="submit" class="btn btn-primary">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
+      </tr>
+      </table>
+    </form>
+  </div>
+</div>
+<div class="domainlist">
+  <h2 style="text-align: left;">Whitelisted API's</h2>
+  <table class="tab">
+    <tr><th>S.no</th><th>APIs</th><th>Action</th></tr>
+    <tr *ngFor="let item of getWebsites;let i=index;"><td>{{i+1}}</td><td>{{item.domain}}</td><td><button  class="btn btn-danger">Remove</button></td></tr>
+  </table>
+</div>

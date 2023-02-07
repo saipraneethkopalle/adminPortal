@@ -1,0 +1,78 @@
+<app-navigation></app-navigation>
+<div class="container">
+  <div  class="row center">
+     <!-- <div class="spinner-border text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+     </div> -->
+  </div>
+  <div class="col-md-3 col-xs-12">
+     <select class="form-control" (change)="setFilter($event)" style="margin-top:30px;">
+        <option value="">Select Type</option>
+        <option [selected]="type == 'Active'" value="Active">Active Fancies</option>
+        <option [selected]="type == 'Inactive'" value="Inactive">Inactive Fancies</option>
+        <option [selected]="type == 'Closed'" value="Closed">Result Fancies</option>
+        <option [selected]="type == 'Rollback'" value="Rollback">Rollback Fancies</option>
+     </select>
+  </div>
+<br>
+  <div  class="row">
+     <div class="col-lg-12 col-md-12 col-xs-12">
+        <div class="col-md-9 col-xs-9 mgb-10">
+           <h2>Match Activities List</h2>
+        </div>
+        <div class="col-md-12 col-xs-12">
+           <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                 <thead>
+                    <tr>
+                       <th class="center pd1p">#</th>
+                       <th>Event ID</th>
+                       <th>Activities</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr *ngFor="let data of matchActivities; let i = index">
+                       <td class="center pd1p">{{ i+1 }}</td>
+                       <td>{{ id }}</td>
+                       <td *ngIf="data.value == 'Add'">Match Added By {{ data.createdBy }} at {{ data.createdAt | date:
+                          'dd MMM yyyy hh:mm:ss a' }}</td>
+                          <td *ngIf="data.value == 'Del'">Match Deleted By {{ data.createdBy }} at {{ data.createdAt | date:
+                            'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td  *ngIf="data.oddsValue&&data.fancyValue&&data.bmValue">Odds Set To {{ data.oddsValue }} By {{ data.createdBy }} at {{
+                        data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}
+                        <br>
+                      Fancy Set To {{ data.fancyValue }} By {{ data.createdBy }} at {{
+                        data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}
+                        <br>
+                        BookMaker Set To {{ data.bmValue }} By {{ data.createdBy }} at {{
+                           data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type2 == 'Fancy'">Fancy Set To {{ data.value }} By {{ data.createdBy }} at {{
+                          data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type2 == 'Fancy A Type'">Fancy Active Type Set To {{ data.value }} By {{
+                          data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type2 == 'Score'">Score Type Set To {{ data.value }} By {{ data.createdBy }} at
+                          {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type2 == 'Odds'">Odds Set To {{ data.value }} By {{ data.createdBy }} at {{
+                          data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type2 == 'Result'">Match Winner Set To {{ data.value }} By {{ data.createdBy }}
+                          at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a'}}</td>
+                       <td *ngIf="data.type2 == 'RollBack'">Match RollBack By {{ data.createdBy }} at {{ data.createdAt
+                          | date: 'dd MMM yyyy hh:mm:ss a'}}</td>
+                       <td *ngIf="data.type1 == 'Fancy' && data.value!='Closed'">Fancy {{ data.result }} {{ data.value
+                          }} From {{ data.type2 }} Source By {{ data.createdBy }} at {{ data.createdAt | date: 'dd MMM
+                          yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type1 == 'Fancy' && data.value=='Closed'">Fancy {{ data.result }} {{ data.value
+                          }} at {{ data.result1 }} From {{ data.type2 }} Source By {{ data.createdBy }} at {{
+                          data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type2 == 'Add Type'">Match Add Type Set To {{ data.value }} By {{
+                          data.createdBy }} at {{ data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                       <td *ngIf="data.type2 == 'BM'">BookMaker Set To {{ data.value }} By {{ data.createdBy }} at {{
+                          data.createdAt | date: 'dd MMM yyyy hh:mm:ss a' }}</td>
+                    </tr>
+                 </tbody>
+              </table>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+.card{
+    color: black;
+    margin: auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 48.7%;
+    margin-top: 38px;
+    text-align: center;
+    border:solid 1px;
+    border-top:none;
+  }
+
+.card-header{
+  font-size: 14px;
+  color: rgb(48, 46, 46);
+  margin: 0;
+  text-align: left;
+}
+.table-header{
+  background: #31708f;
+  color: #fff;
+}
+.user-text{
+  font-size: 14px;
+  padding-right: 30px;
+}
+.password-text{
+  font-size: 14px;
+  padding-right: 32px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+.error{
+  padding:10px;
+  color:red;
+}
+
+.btn{
+  font-size: 14px;
+  margin-right: 23%;
+  /* background-color: rgb(56, 124, 197); */
+}
+
+.user-input{
+  width: 45%;
+  border-radius: 6px;
+  border-color: rgb(95, 141, 209);
+}
+
+.password-input{
+  width: 45%;
+  border-radius: 6px;
+  border-color: rgb(95, 141, 209);
+}
+
+.loginbtn{
+  font-size: 14px;
+  margin-right: 0%;
+  background-color: rgb(56, 124, 197);
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 7px;
+}
+
+#button-addon2{
+  border: none;
+  color: black;
+  position: absolute;
+  right: 0px;
+  top: 6px;
+  height: 30px;
+  cursor: pointer;
+  padding-top: 6px;
+  padding-left: 0px;
+  padding-right: 15px;
+  padding-bottom: 0px;
+  width: 0px;
+  height: 0px;
+  outline: none;
+}
+
+#button-addon2:hover,#button-addon2:focus{
+  background:transparent;
+  border:none;
+  outline: none;
+  box-shadow: none;
+}
+
+
+.buttonIn {
+  position: relative;
+}
+

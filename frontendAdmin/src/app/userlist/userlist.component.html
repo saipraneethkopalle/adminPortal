@@ -1,0 +1,56 @@
+<app-navigation></app-navigation>
+<div class="card">
+  <div class="card-header bg-header text-white">Register</div>
+  <div class="card-body">
+    <form [formGroup]="addUserList" (ngSubmit)="addUsers()" method="post" autocomplete="off" id="registerform">
+      <table>
+        <tr><td><label>Name:</label></td>
+          <td style="padding-left:10px;padding-right:10px;">
+            <input type="text" class="form-control" placeholder="Enter Name" formControlName="username">
+          </td>
+          <td><label>Password:</label></td>
+          <td style="padding-left:10px;padding-right:10px;"> <input type="password" class="form-control" placeholder="Enter Password" formControlName="password">
+          </td>
+          <td></td><td></td>
+          <td><button type="submit" style="float:right;" class="btn btn-primary">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;">{{errorMessage}}</td>
+        </tr>
+        </table>
+    </form>
+  </div>
+</div>
+
+<div class="userlist">
+  <h2 style="text-align: left;">Users List</h2>
+  <table class="tab">
+    <tr><th>S.no</th><th>Name</th><th>Password</th><th>Action</th></tr>
+    <tr *ngFor="let item of userList;let i=index;">
+      <td>{{i+1}}</td><td>{{item.username}}</td>
+      <td><input type="text" value="{{item.slag}}" id="{{item.username}}" style="border:none;pointer-events:none;"></td>
+      <td><button class="btn btn-success" type="button" (click)="passcurrentUser(item)" data-toggle="modal" data-target="#passwordModal">Update Password</button></td>
+      <!-- <td><button routerLink="/rolepage" class="btn btn-primary">Role</button></td> -->
+    </tr>
+  </table>
+</div>
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="passwordModalLabel">Update Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr><td style="font-weight: bold;"><label>Username: </label> <input type="text" value="{{currentusername}}" style="float:right;" disabled></td></tr>
+          <tr><td><label style="font-weight: bold;">Password: </label><input type="text" (keyup)="changePassword($event)" value="{{currentpassword}}" style="float:right;" id="password" required></td><td style="color:red;font-size:12px;">{{errormsg}}</td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updatePassword(currentUser)" *ngIf="isEmpty">Submit</button>
+        <button type="button" class="btn btn-primary" (click)="updatePassword(currentUser)" *ngIf="!isEmpty" data-dismiss="modal" aria-label="Close">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

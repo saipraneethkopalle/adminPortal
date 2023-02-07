@@ -1,0 +1,41 @@
+<app-navigation></app-navigation>
+<div class="main">
+<h1 >ALL ACTIVE EVENTS</h1>
+<p id="pts">Tennis</p>
+
+
+    <table>
+        <tr class="table-header">
+            <th scope="col">#</th>
+            <th scope="col">Event ID</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Sport Name</th>
+            <th scope="col">Odds Source</th>
+            <th scope="col">Open Date</th>
+            <th scope="col">Action</th>
+            <th scope="col" *ngIf="level == 1">Set Limit</th>
+            <th scope="col" *ngIf="level == 1">Result</th>
+        </tr>
+        <tr *ngFor="let item of matchesData;let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{item['eventId']}} <br> {{item['marketId']}}</td>
+            <td>{{item['eventName']}}</td>
+            <td style="width:100px"><span class="badge badge-pill badge-primary" style="padding:10px;font-size:12px;">{{item['sportName']}}</span></td>
+            <td style="width:10%;"><select class="dr" (change)="changeOdds(item,$event)">
+              <option value="tiger" [selected]="item['oddsProvider'] == 'tiger'">Tiger</option>
+              <option value="betfair" [selected]="item['oddsProvider'] == 'betfair'">Betfair</option>
+              <option value="sky3" [selected]="item['oddsProvider'] == 'sky3'">Sky3</option>
+            </select>
+            <button type="button" (click)="updateProvider(item)" class="btn btn-success uscore">Update Odds</button>
+          </td>
+            <td>{{item['openDate']}}</td>
+            <td><button type="button" id="btt" class="btn btn-danger" (click)="redirect(item['eventId'])">Get Fancy</button><br>
+              <button type="button" id="btt" class="btn btn-primary" (click)="showActivity(item['eventId'])">Show Activities</button>
+            </td>
+            <td *ngIf="level == 1"><button type="button" id="btt" class="btn btn-warning" (click)="gosetlimit(item['marketId'])">Set Limit</button></td>
+            <td style="width:13%;" *ngIf="level == 1">
+              <button type="button" id="bt" class="btn btn-primary" (click)="removeMatch(item)">Remove Match</button><button type="button" id="bt" (click)="deleteMatch(item)" class="btn btn-danger">Delete Match</button></td>
+        </tr>
+
+    </table>
+</div>

@@ -1,0 +1,587 @@
+<app-navigation></app-navigation>
+<div class="main">
+  <div>
+    Source <select class="dr" (change)="changeOdds($event)">
+      <option [selected]="Provider == 'diamond'" value="diamond">Diamond</option>
+      <option [selected]="Provider == 'betfair'" value="betfair">Betfair</option>
+      <option [selected]="Provider == 'tiger'" value='tiger'>Tiger</option>
+      <option [selected]="Provider == 'sky'" value="sky">Sky</option>
+      <option [selected]="Provider == 'ryan'" value='ryan'>Ryan</option>
+    </select>
+    <button type="button" style="margin-left: 25px;" (click)="updateProvider()" class="btn btn-success">Update
+      Odds</button>
+  </div>
+  <br>
+  <div class="runBlock" *ngIf="oddsType == 'Betfair' || oddsType == 'Tiger' || oddsType == 'Ryan'">
+    <div>
+      {{Provider | titlecase}}[{{runnersList?.status}}]
+    </div><br>
+    <div class="runners">
+      <table class="teamData">
+        <!-- <tr class="table-header">
+          <th scope="col" colspan="7" style="text-align:center;">Odds Source</th>
+        </tr> -->
+        <tr class="table-header">
+          <th>Odds Source</th>
+          <th scope="col" colspan="3" style="text-align:right;padding-right:10px;font-size:12px;">Back Details</th>
+          <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
+        </tr>
+        <tr *ngFor="let run of runnersList?.runners;" style="font-size: 14px;">
+          <td style="width:200px;">{{selectionName(run.selectionId)[0]?.name}}</td>
+          <td style="background-color: #d7e8f4;width:80px;font-size:12px;font-weight:bold;text-align: center;"
+            *ngFor="let back of run.ex.availableToBack">{{back.price}}<br> <span
+              style="font-weight: normal;font-size:10px;">{{back.size}}</span></td>
+          <td style="background-color: #faa9ba;width:80px;font-size:10px;font-weight:bold;text-align: center;"
+            *ngFor="let lay of run.ex.availableToLay">{{lay.price}}<br><span
+              style="font-weight: normal;font-size:10px">{{lay.size}}</span></td>
+        </tr>
+      </table>
+      <table class="teamData2">
+        <!-- <tr class="table-header">
+          <th scope="col" colspan="7" style="text-align:center;">BookMaker Source</th>
+        </tr> -->
+         <tr class="table-header">
+           <th> BookMaker Source</th>
+           <th scope="col" colspan="3" style="text-align:right;padding-right:10px;font-size:12px;">Back Details</th>
+           <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
+         </tr>
+        <tr *ngFor="let run of runnersList2;" style="font-size: 14px;height:60px;">
+          <td >{{run.nat}}</td>
+          <td scope="col" colspan="6" *ngIf="run.s == 'SUSPENDED'"
+          style="background-color:#D7E8F4;text-align:center;width:200px;padding-left:10px;font-size:12px;">
+           <span class="sus"> {{run.s}}</span>
+          </td>
+          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+            style="background-color: #d7e8f4;width:200px;">
+            <dl style="float:right;margin:0;width:63px;height:38px;">
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.b3 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;width:63px;height:40px;display:none;">{{run.b2 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.b1 | number:'1.0-1'}}</dd>
+             </dl>
+            </td>
+          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          style="background-color: #faa9ba;text-align: left;width:200px;">
+          <dl style="margin:0;width:63px;height:38px;">
+            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.l1 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l2 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l3 | number:'1.0-1'}}</dd>
+            </dl>
+          </td>
+        </tr>
+       </table>
+    </div>
+  </div>
+  <div class="runBlock" *ngIf="oddsType == 'Diamond'" style="width: 100%;">
+    <div>
+      Diamond [ {{ runnersList[0]?.mstatus }} ]
+    </div><br>
+    <div class="runners">
+      <table class="teamData">
+        <tr class="table-header">
+          <th>Odds Source</th>
+          <th scope="col" colspan="3" style="text-align:right;padding-right:10px;font-size:12px;">Back Details</th>
+          <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
+        </tr>
+        <tr *ngFor="let run of runnersList;" style="font-size: 14px;">
+          <td style="width:200px;">{{ run.nat }}</td>
+          <td style="background-color: #d7e8f4;width:80px;font-size:12px;font-weight:bold;text-align: center;"
+            >{{ run.b3 }}<br> <span
+              style="font-weight: normal;font-size:10px;">{{ run.bs3 }}</span></td>
+              <td style="background-color: #d7e8f4;width:80px;font-size:12px;font-weight:bold;text-align: center;"
+            >{{ run.b2 }}<br> <span
+              style="font-weight: normal;font-size:10px;">{{ run.bs2 }}</span></td>
+              <td style="background-color: #d7e8f4;width:80px;font-size:12px;font-weight:bold;text-align: center;"
+            >{{ run.b1 }}<br> <span
+              style="font-weight: normal;font-size:10px;">{{ run.bs1 }}</span></td>
+          <td style="background-color: #faa9ba;width:80px;font-size:10px;font-weight:bold;text-align: center;"
+            >{{ run.l1 }}<br><span
+              style="font-weight: normal;font-size:10px">{{ run.ls1 }}</span></td>
+              <td style="background-color: #faa9ba;width:80px;font-size:10px;font-weight:bold;text-align: center;"
+            >{{ run.l2 }}<br><span
+              style="font-weight: normal;font-size:10px">{{ run.ls2 }}</span></td>
+              <td style="background-color: #faa9ba;width:80px;font-size:10px;font-weight:bold;text-align: center;"
+              >{{ run.l3 }}<br><span
+                style="font-weight: normal;font-size:10px">{{ run.ls3 }}</span></td>
+        </tr>
+      </table>
+      <table class="teamData2">
+        <!-- <tr class="table-header">
+          <th scope="col" colspan="7" style="text-align:center;">BookMaker Source</th>
+        </tr> -->
+         <tr class="table-header">
+           <th> BookMaker Source</th>
+           <th scope="col" colspan="3" style="text-align:right;padding-right:10px;font-size:12px;">Back Details</th>
+           <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
+         </tr>
+        <tr *ngFor="let run of runnersList2;" style="font-size: 14px;height:60px;">
+          <td >{{run.nat}}</td>
+          <td scope="col" colspan="6" *ngIf="run.s == 'SUSPENDED'"
+          style="background-color:#D7E8F4;text-align:center;width:200px;padding-left:10px;font-size:12px;">
+           <span class="sus"> {{run.s}}</span>
+          </td>
+          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+            style="background-color: #d7e8f4;width:200px;">
+            <dl style="float:right;margin:0;width:63px;height:38px;">
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.b3 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;width:63px;height:40px;display:none;">{{run.b2 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.b1 | number:'1.0-1'}}</dd>
+             </dl>
+            </td>
+          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          style="background-color: #faa9ba;text-align: left;width:200px;">
+          <dl style="margin:0;width:63px;height:38px;">
+            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.l1 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l2 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l3 | number:'1.0-1'}}</dd>
+            </dl>
+          </td>
+        </tr>
+       </table>
+    </div>
+  </div>
+  <div class="runBlock" *ngIf="oddsType == 'Sky'" style="width: 100%;">
+    <div >
+      Sky Exchange [ OPEN ]
+    </div><br>
+    <div class="runners">
+      <table class="teamData">
+        <!-- <tr class="table-header">
+          <th scope="col" colspan="7" style="text-align:center;">Odds Source</th>
+        </tr> -->
+        <tr class="table-header">
+          <th>Odds Source</th>
+          <th scope="col" colspan="3" style="text-align:right;padding-right:10px;font-size:12px;">Back Details</th>
+          <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
+        </tr>
+        <tr *ngFor="let run of runnersList?.runners;" style="font-size: 14px;">
+          <td style="width:200px;">{{selectionName(run.selectionId)[0]?.name}}</td>
+          <td style="background-color: #d7e8f4;width:80px;font-size:12px;font-weight:bold;text-align: center;"
+            *ngFor="let back of run.ex.availableToBack">{{back.price}}<br> <span
+              style="font-weight: normal;font-size:10px;">{{back.size}}</span></td>
+          <td style="background-color: #faa9ba;width:80px;font-size:10px;font-weight:bold;text-align: center;"
+            *ngFor="let lay of run.ex.availableToLay">{{lay.price}}<br><span
+              style="font-weight: normal;font-size:10px">{{lay.size}}</span></td>
+        </tr>
+      </table>
+      <table class="teamData2">
+        <!-- <tr class="table-header">
+          <th scope="col" colspan="7" style="text-align:center;">BookMaker Source</th>
+        </tr> -->
+         <tr class="table-header">
+           <th> BookMaker Source</th>
+           <th scope="col" colspan="3" style="text-align:right;padding-right:10px;font-size:12px;">Back Details</th>
+           <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
+         </tr>
+        <tr *ngFor="let run of runnersList2;" style="font-size: 14px;height:60px;">
+          <td >{{run.nat}}</td>
+          <td scope="col" colspan="6" *ngIf="run.s == 'SUSPENDED'"
+          style="background-color:#D7E8F4;text-align:center;width:200px;padding-left:10px;font-size:12px;">
+           <span class="sus"> {{run.s}}</span>
+          </td>
+          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+            style="background-color: #d7e8f4;width:200px;">
+            <dl style="float:right;margin:0;width:63px;height:38px;">
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.b3 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;width:63px;height:40px;display:none;">{{run.b2 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.b1 | number:'1.0-1'}}</dd>
+             </dl>
+            </td>
+          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          style="background-color: #faa9ba;text-align: left;width:200px;">
+          <dl style="margin:0;width:63px;height:38px;">
+            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.l1 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l2 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l3 | number:'1.0-1'}}</dd>
+            </dl>
+          </td>
+        </tr>
+       </table>
+    </div>
+  </div>
+  <div>
+    <h1>All Fancy for {{eventName}}</h1>
+   <button id="all" (click)="getFancyByStatus('All', 'all')" style="margin-right:5px;" class="btn btn-success tab">New Fancies</button>
+   <button id="inactive" (click)="getFancyByStatus('Inactive', 'inactive')" style="margin-right:5px;" class="btn btn-primary tab">Inactive</button>
+   <button id="active" (click)="getFancyByStatus('Active', 'active')" style="margin-right:5px;" class="btn btn-primary tab">Active</button>
+   <button id="close" (click)="getFancyByStatus('Closed', 'close')" style="margin-right:5px;" class="btn btn-primary tab">Close</button>
+   <button id="remove" (click)="getFancyByStatus('Removed', 'remove')" style="margin-right:5px;" class="btn btn-primary tab">Removed</button>
+    <button class="btn  btn-danger" (click)="redirecteve()" style="margin-right: 5px;">Show Events</button>
+
+    <div class="input-group" style="width:50%;margin-top:10px;">
+      <input type="search" class="form-control rounded" style="margin-right:5px;" (keyup)="searchFancy($event)"
+        placeholder="Fancy search" aria-label="Search" aria-describedby="search-addon" />
+      <button type="button" class="btn btn-primary" (click)="insertAllFancy('Active',fancyList)">Active All</button>
+    </div>
+  </div>
+  <p id="pts">Auto Fancy</p>
+  <div class="table-responsive">
+   <table class="table table-bordered">
+      <thead>
+         <tr>
+            <th>#</th>
+            <th>Fancy Name</th>
+            <th *ngIf="fancyProvider == 'diamond'">Fancy Type</th>
+            <th id="yes">No</th>
+            <th id="no">Yes</th>
+            <th>Action</th>
+            <th>Activities</th>
+         </tr>
+      </thead>
+      <tbody *ngIf="fancyProvider == 'diamond'">
+         <tr *ngFor="let afancy of fancyList; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ afancy.nat }}</td>
+            <td>{{ afancy.gtype }}</td>
+            <td *ngIf="afancy.gstatus != ''" colspan="2" class="ballR">Ball Running</td>
+            <td *ngIf="afancy.gstatus == ''" id="yes">{{ afancy.l1 }} <br> {{ afancy.ls1 }}</td>
+            <td *ngIf="afancy.gstatus == ''" id="no">{{ afancy.b1 }} <br> {{ afancy.bs1 }}</td>
+            <td *ngIf="operation == 'All'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'diamond', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="setFancyStatus('Removed', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'diamond', '')"
+                  class="btn btn-danger">Remove</button>
+            </td>
+            <td *ngIf="operation == 'Active'">
+               <button
+                  (click)="setFancyStatus('Inactive', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'diamond', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Inactive</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sid+'.FY', afancy.sid, afancy.nat, afancy.type, afancy.gtype)"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Inactive'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'diamond', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sid+'.FY', afancy.sid, afancy.nat, afancy.type, afancy.gtype)"
+                  class="btn btn-danger" style="margin-right:5px;">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Closed'">
+               <button
+                  (click)="rollbackPopup(result, afancy.sid, result +'-'+ afancy.sid+'.FY',afancy.type, afancy.gtype)"
+                  class="btn btn-danger" >Rollback</button>
+            </td>
+            <td *ngIf="operation == 'Removed'">
+              <button class="btn btn-danger" >Rollback</button>
+            </td>
+            <td>
+               <a *ngIf="afancy.sid"
+                  routerLink="/fancyactivities/{{ result }}/{{ result +'-'+ afancy.sid+'.FY' }}"><button
+                     class="btn btn-info" style="margin-right:5px;">Show Activities</button></a>
+               <a *ngIf="!afancy.sid"
+                  routerLink="/fancyactivities/{{ result }}/{{ afancy.sid }}"><button
+                     class="btn btn-info" >Show Activities</button></a>
+            </td>
+         </tr>
+      </tbody>
+      <tbody *ngIf="fancyProvider == 'virtual'">
+         <tr *ngFor="let afancy of fancyList ; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ afancy.nat }}</td>
+            <td *ngIf="afancy.gstatus != ''" colspan="2" class="ballR">Ball Running</td>
+            <td *ngIf="afancy.gstatus == ''" id="yes">{{ afancy.l1 }} <br> {{ afancy.ls1 }}</td>
+            <td *ngIf="afancy.gstatus == ''" id="no">{{ afancy.b1 }} <br> {{ afancy.bs1 }}</td>
+            <td *ngIf="operation == 'All'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'virtual', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="setFancyStatus('Removed', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'virtual', '')"
+                  class="btn btn-danger">Remove</button>
+            </td>
+            <td *ngIf="operation == 'Active'">
+               <button
+                  (click)="setFancyStatus('Inactive', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'virtual', '')"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Inactive</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sid+'.FY', afancy.selectionId, afancy.nat, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Inactive'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'virtual', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sid+'.FY', afancy.selectionId, afancy.nat, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Closed'">
+               <button
+                  (click)="rollbackPopup(result, afancy.selectionId, result +'-'+ afancy.sid+'.FY', 'Fancy', '')"
+                  class="btn btn-danger">Rollback</button>
+            </td>
+            <td *ngIf="operation == 'Removed'">
+              <button class="btn btn-danger">Rollback</button>
+            </td>
+            <td>
+               <a *ngIf="afancy.sid"
+                  routerLink="/fancyactivities/{{ result }}/{{ result +'-'+ afancy.sid+'.FY' }}"><button
+                     class="btn btn-info" style="margin-right:5px;">Show Activities</button></a>
+               <a *ngIf="!afancy.sid"
+                  routerLink="/fancyactivities/{{ result }}/{{ afancy.selectionId }}"><button
+                     class="btn btn-info">Show Activities</button></a>
+            </td>
+         </tr>
+      </tbody>
+      <tbody *ngIf="fancyProvider == 'jdiamond'">
+         <tr *ngFor="let afancy of fancyList ; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ afancy.nat }}</td>
+            <td *ngIf="afancy.gstatus != ''" colspan="2" class="ballR">Ball Running</td>
+            <td *ngIf="afancy.gstatus == ''" id="yes">{{ afancy.l1 }} <br> {{ afancy.ls1 }}</td>
+            <td *ngIf="afancy.gstatus == ''" id="no">{{ afancy.b1 }} <br> {{ afancy.bs1 }}</td>
+            <td *ngIf="operation == 'All'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'jdiamond', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="setFancyStatus('Removed', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'jdiamond', '')"
+                  class="btn btn-danger">Remove</button>
+            </td>
+            <td *ngIf="operation == 'Active'">
+               <button
+                  (click)="setFancyStatus('Inactive', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'jdiamond', '')"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Inactive</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sid+'.FY', afancy.selectionId, afancy.nat, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Inactive'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sid+'.FY', afancy.nat, afancy.sid, 'jdiamond', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sid+'.FY', afancy.selectionId, afancy.nat, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Closed'">
+               <button
+                  (click)="rollbackPopup(result, afancy.selectionId, result +'-'+ afancy.sid+'.FY', 'Fancy', '')"
+                  class="btn btn-danger" style="margin-right:5px;">Rollback</button>
+            </td>
+            <td *ngIf="operation == 'Removed'">
+              <button class="btn btn-danger" style="margin-right:5px;">Rollback</button>
+            </td>
+            <td>
+               <a *ngIf="afancy.sid"
+                  routerLink="/fancyactivities/{{ result }}/{{ result +'-'+ afancy.sid+'.FY' }}"><button
+                     class="btn btn-info" style="margin-right:5px;">Show Activities</button></a>
+               <a *ngIf="!afancy.sid"
+                  routerLink="/fancyactivities/{{ result }}/{{ afancy.selectionId }}"><button
+                     class="btn btn-info">Show Activities</button></a>
+            </td>
+         </tr>
+      </tbody>
+      <tbody *ngIf="fancyProvider == 'sky'">
+         <tr *ngFor="let afancy of fancyList ; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ afancy.marketName }}</td>
+            <td *ngIf="afancy.status == '6' || afancy.status == '10'" colspan="2" class="ballR">Ball Running
+            </td>
+            <td *ngIf="afancy.status == '2'" id="yes">{{ afancy.runsNo }} <br> {{ afancy.oddsNo }}
+            </td>
+            <td *ngIf="afancy.status == '2'" id="no">{{ afancy.runsYes }} <br> {{ afancy.oddsYes }}
+            </td>
+            <td *ngIf="operation == 'All'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.marketId+'.FY', afancy.marketName, afancy.marketId, 'sky', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="setFancyStatus('Removed', result, result +'-'+ afancy.marketId+'.FY', afancy.marketName, afancy.marketId, 'sky', '')"
+                  class="btn btn-danger">Remove</button>
+            </td>
+            <td *ngIf="operation == 'Active'">
+               <button
+                  (click)="setFancyStatus('Inactive', result, result +'-'+ afancy.marketId+'.FY', afancy.marketName, afancy.marketId, 'sky', '')"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Inactive</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.marketId+'.FY', afancy.selectionId, afancy.marketName, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Inactive'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.marketId+'.FY', afancy.marketName, afancy.marketId, 'sky', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.marketId+'.FY', afancy.selectionId, afancy.marketName, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Closed'">
+               <button
+                  (click)="rollbackPopup(result, afancy.selectionId, result +'-'+ afancy.marketId+'.FY', 'Fancy', '')"
+                  class="btn btn-danger">Rollback</button>
+            </td>
+            <td *ngIf="operation == 'Removed'">
+              <button class="btn btn-danger">Rollback</button>
+            </td>
+            <td>
+               <a *ngIf="afancy.marketId"
+                  routerLink="/fancyactivities/{{ result }}/{{ result +'-'+ afancy.marketId+'.FY' }}"><button
+                     class="btn btn-info" style="margin-right:5px;">Show Activities</button></a>
+               <a *ngIf="!afancy.marketId"
+                  routerLink="/fancyactivities/{{ result }}/{{ afancy.selectionId }}"><button
+                     class="btn btn-info">Show Activities</button></a>
+            </td>
+         </tr>
+      </tbody>
+      <tbody *ngIf="fancyProvider == 'sk'">
+         <tr *ngFor="let afancy of fancyList ; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ afancy.runner_name }}</td>
+            <td *ngIf="afancy.is_sus" colspan="2" class="ballR">Ball Running
+            </td>
+            <td *ngIf="!afancy.is_sus" id="yes">{{ afancy.no_odd }} <br> {{ afancy.no_bhav }}
+            </td>
+            <td *ngIf="!afancy.is_sus" id="no">{{ afancy.yes_odd }} <br> {{ afancy.yes_bhav }}
+            </td>
+            <td *ngIf="operation == 'All'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sky_fancy_id+'.FY', afancy.runner_name, afancy.sky_fancy_id, 'sk', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="setFancyStatus('Removed', result, result +'-'+ afancy.sky_fancy_id+'.FY', afancy.runner_name, afancy.sky_fancy_id, 'sk', '')"
+                  class="btn btn-danger">Remove</button>
+            </td>
+            <td *ngIf="operation == 'Active'">
+               <button
+                  (click)="setFancyStatus('Inactive', result, result +'-'+ afancy.sky_fancy_id+'.FY', afancy.runner_name, afancy.sky_fancy_id, 'sk', '')"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Inactive</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sky_fancy_id+'.FY', afancy.selectionId, afancy.runner_name, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Inactive'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.sky_fancy_id+'.FY', afancy.runner_name, afancy.sky_fancy_id, 'sk', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.sky_fancy_id+'.FY', afancy.selectionId, afancy.runner_name, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Closed'">
+               <button
+                  (click)="rollbackPopup(result, afancy.selectionId, result +'-'+ afancy.sky_fancy_id+'.FY', 'Fancy', '')"
+                  class="btn btn-danger">Rollback</button>
+            </td>
+            <td *ngIf="operation == 'Removed'">
+              <button class="btn btn-danger">Rollback</button>
+            </td>
+            <td>
+               <a *ngIf="afancy.sky_fancy_id"
+                  routerLink="/fancyactivities/{{ result }}/{{ result +'-'+ afancy.sky_fancy_id+'.FY' }}"><button
+                     class="btn btn-info" style="margin-right:5px;">Show Activities</button></a>
+               <a *ngIf="!afancy.sky_fancy_id"
+                  routerLink="/fancyactivities/{{ result }}/{{ afancy.selectionId }}"><button
+                     class="btn btn-info">Show Activities</button></a>
+            </td>
+         </tr>
+      </tbody>
+      <tbody *ngIf="fancyProvider == 'betfair'">
+         <tr *ngFor="let afancy of fancyList ; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ afancy.RunnerName }}</td>
+            <td *ngIf="afancy.GameStatus != ''" colspan="2" class="ballR">Ball Running
+            </td>
+            <td *ngIf="afancy.GameStatus == ''" id="yes">{{ afancy.LayPrice1 }} <br>
+               {{ afancy.LaySize1 }}
+            </td>
+            <td *ngIf="afancy.GameStatus == ''" id="no">{{ afancy.BackPrice1 }} <br>
+               {{ afancy.BackSize1 }}
+            </td>
+            <td *ngIf="operation == 'All'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.SelectionId+'.FY', afancy.RunnerName, afancy.SelectionId, 'betfair', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="setFancyStatus('Removed', result, result +'-'+ afancy.SelectionId+'.FY', afancy.RunnerName, afancy.SelectionId, 'betfair', '')"
+                  class="btn btn-danger">Remove</button>
+            </td>
+            <td *ngIf="operation == 'Active'">
+               <button
+                  (click)="setFancyStatus('Inactive', result, result +'-'+ afancy.SelectionId+'.FY', afancy.RunnerName, afancy.SelectionId, 'betfair', '')"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Inactive</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.SelectionId+'.FY', afancy.selectionId, afancy.RunnerName, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Inactive'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.SelectionId+'.FY', afancy.RunnerName, afancy.SelectionId, 'betfair', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.SelectionId+'.FY', afancy.selectionId, afancy.RunnerName, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Closed' || operation == 'Removed'">
+            </td>
+            <td>
+               <a *ngIf="afancy.SelectionId"
+                  routerLink="/fancyactivities/{{ result }}/{{ result +'-'+ afancy.SelectionId+'.FY' }}"><button
+                     class="btn btn-info" style="margin-right:5px;">Show Activities</button></a>
+               <a *ngIf="!afancy.SelectionId"
+                  routerLink="/fancyactivities/{{ result }}/{{ afancy.selectionId }}"><button
+                     class="btn btn-info">Show Activities</button></a>
+            </td>
+         </tr>
+      </tbody>
+      <tbody *ngIf="fancyProvider == 'tiger'">
+         <tr *ngFor="let afancy of fancyList ; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ afancy.name }}</td>
+            <td *ngIf="afancy.status == 'SUSPENDED'" colspan="2" class="ballR">Ball Running
+            </td>
+            <td *ngIf="afancy.status != 'SUSPENDED'" id="yes">{{ afancy.l1 }} <br> {{ afancy.ls1 }}
+            </td>
+            <td *ngIf="afancy.status != 'SUSPENDED'" id="no">{{ afancy.b1 }} <br> {{ afancy.bs1 }}
+            </td>
+            <td *ngIf="operation == 'All'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.id+'.FY', afancy.name, afancy.id, 'tiger', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="setFancyStatus('Removed', result, result +'-'+ afancy.id+'.FY', afancy.name, afancy.id, 'tiger', '')"
+                  class="btn btn-danger">Remove</button>
+            </td>
+            <td *ngIf="operation == 'Active'">
+               <button
+                  (click)="setFancyStatus('Inactive', result, result +'-'+ afancy.id+'.FY', afancy.name, afancy.id, 'tiger', '')"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Inactive</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.id+'.FY', afancy.selectionId, afancy.name, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Inactive'">
+               <button
+                  (click)="setFancyStatus('Active', result, result +'-'+ afancy.id+'.FY', afancy.name, afancy.id, 'tiger', afancy)"
+                  class="btn btn-danger" style="margin-right:5px;">Mark Active</button>
+               <button
+                  (click)="closePopup('Closed', result, result +'-'+ afancy.id+'.FY', afancy.selectionId, afancy.name, 'Fancy', '')"
+                  class="btn btn-danger">Closed</button>
+            </td>
+            <td *ngIf="operation == 'Closed'">
+               <button
+                  (click)="rollbackPopup(result, afancy.selectionId, result +'-'+ afancy.id+'.FY', 'Fancy', '')"
+                  class="btn btn-danger">Rollback</button>
+            </td>
+            <td *ngIf="operation == 'Removed'">
+              <button
+                  (click)="rollbackPopup(result, afancy.selectionId, result +'-'+ afancy.id+'.FY', 'Fancy', '')"
+                  class="btn btn-danger">Rollback</button>
+            </td>
+            <td>
+               <a *ngIf="afancy.id"
+                  routerLink="/fancyactivities/{{ result }}/{{ result +'-'+ afancy.id+'.FY' }}"><button
+                     class="btn btn-info" style="margin-right:5px;">Show Activities</button></a>
+               <a *ngIf="!afancy.id"
+                  routerLink="/fancyactivities/{{ result }}/{{ afancy.selectionId }}"><button
+                     class="btn btn-info">Show Activities</button></a>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</div>
+
+</div>

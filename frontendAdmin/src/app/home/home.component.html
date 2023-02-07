@@ -1,0 +1,111 @@
+  <app-navigation></app-navigation>
+<div class="main">
+<h1 >ALL ACTIVE EVENTS</h1>
+<p id="pts">Cricket</p>
+
+    <table  style="font-size:14px;">
+        <tr class="table-header">
+            <th scope="col">#</th>
+            <th scope="col">Event ID</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Open Date</th>
+            <th scope="col">Odd Source</th>
+            <th scope="col">Fancy Source </th>
+            <th scope="col">BM Source</th>
+            <th scope="col">Fancy Active Type</th>
+            <th scope="col">Add Type</th>
+            <th scope="col">Action</th>
+        </tr>
+        <tr>
+          <tr style="overflow-x: auto;" *ngFor="let item of matchList;let i= index">
+            <td>{{i+1}}</td>
+            <td>{{item['eventId']}} <br> {{item['marketId']}}</td>
+            <td style="width:50%;">{{item['eventName']}}</td>
+            <td>{{item['openDate'] | date :'dd/MM/yyyy h:mm:ss a'}}</td>
+            <td style="width:10%;"><select class="dr" (change)="changeOdds(item,$event)">
+              <option value="tiger" [selected]="item['oddsProvider'] == 'tiger'">Tiger</option>
+              <option value="betfair" [selected]="item['oddsProvider'] == 'betfair'">Betfair</option>
+              <option value="diamond" [selected]="item['oddsProvider']=='diamond'">Diamond</option>
+            <option [selected]="item['oddsProvider']== 'sky'" value="sky">Sky</option>
+            <option [selected]="item['oddsProvider']== 'ryan'" value='ryan'>Ryan</option>
+              </select>
+              <button type="button" (click)="updateProvider(item)" class="btn btn-success uscore">Update Odds</button>
+            </td>
+            <td style="width:14%;"><select class="dr" style="width:120px;" (change)="changeOdds(item,$event)">
+              <option value="diamond" [selected]="item['fancyProvider'] == 'diamond'">Diamond</option>
+              <option value="tiger" [selected]="item['fancyProvider'] == 'tiger'">Tiger</option>
+              <option value="sky3" [selected]="item['fancyProvider'] == 'sky3'" >Sky3</option>
+
+            </select>
+              <button type="button" (click)="updateProvider2(item)" class="btn btn-success uscore" style="width:120px;">Update Fancy</button>
+            </td>
+            <td ><select class="dr" (change)="changeOdds(item,$event)">
+              <option value="diamond" [selected]="item['bmProvider'] == 'diamond'" >Diamond</option>
+              <option value="tiger" [selected]="item['bmProvider'] == 'tiger'">Tiger</option>
+              <option value="sky3" [selected]="item['bmProvider'] == 'sky3'">Sky3</option>
+            </select>
+              <button type="button" (click)="updateProvider3(item)" class="btn btn-success uscore">Update BM</button>
+            </td>
+            <td><select class="dr" (change)="changeOdds(item,$event)">
+                <option value="auto" [selected]="item['fancyAType']=='auto'" >Auto</option>
+                <option value="manual"  [selected]="item['fancyAType']=='manual'" >Manual</option>
+              </select>
+              <button type="button" (click)="updateProvider4(item)" class="btn btn-success uscore">Update Type</button>
+            </td>
+            <td><select class="dr" (change)="changeOdds(item,$event)">
+                <option value="all" [selected]="item['addType']=='all'" >All</option>
+                <option value="apna" [selected]="item['addType']=='apna'">Apna</option>
+              </select>
+              <button type="button" (click)="updateProvider5(item)" class="btn btn-success uscore">Update Type</button>
+            </td>
+            <td >
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Settings
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size:14px;">
+                  <a class="dropdown-item" role="button" (click)="redirect(item['eventId'])">Get Fancy</a>
+                  <a class="dropdown-item" role="button" *ngIf="level == 1" (click)="gosetlimit(item['marketId'])">Set Limit</a>
+                  <a class="dropdown-item" role="button" (click)="removeMatch(item)" *ngIf="level == 1">Remove Match</a>
+                  <a class="dropdown-item" role="button" (click)="setData(item.eventId,item.eventName)" data-toggle="modal"
+                  data-target="#header" data-backdrop="static" data-keyboard="false">Update Header</a>
+                  <a class="dropdown-item" routerLink="/match-activities/{{ item.eventId }}">Show Activities</a>
+                  <a class="dropdown-item" role="button" *ngIf="level == 1" (click)="deleteMatch(item)">Delete Match</a>
+                </div>
+              </div>
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<div class="modal fade" id="header" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 style="font-size:16px;">Update Header</h4>
+        <button (click)="removeData()" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <section class="panel panel-default">
+          <header class="panel-heading font-bold">{{ eventName }}</header><br>
+          <div class="panel-body">
+            <div class="form-group" style="width: 100%;">
+              <input id="hname" style="width: 100%;" type="text" class="form-control" placeholder="Enter Header">
+            </div>
+            <div class="form-group" style="width: 100%;">
+              <input id="team1" style="width: 100%;" type="text" class="form-control" placeholder="Enter Team 1">
+            </div>
+            <div class="form-group" style="width: 100%;">
+              <input id="team2" style="width: 100%;" type="text" class="form-control" placeholder="Enter Team 2">
+            </div>
+            <div class="form-group" style="width: 100%;">
+              <input id="team3" style="width: 100%;" type="text" class="form-control" placeholder="Enter Team 3">
+            </div>
+            <button (click)="updateHeaders()" id="hbtn" type="button" class="btn btn-success">Deposite</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

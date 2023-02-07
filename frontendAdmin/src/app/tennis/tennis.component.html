@@ -1,0 +1,42 @@
+<app-navigation></app-navigation>
+<div class="main">
+<h1>Match List</h1>
+<p>Tennis</p>
+    <table>
+        <tr class="tennis-header">
+            <th scope="col">#</th>
+            <th scope="col">Event ID</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Competition Name</th>
+            <th scope="col">Sport Name</th>
+            <th scope="col">Open Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+        <tr *ngFor="let item of matchList;let i= index">
+            <td>{{i+1}}</td>
+            <td>{{item['eventId']}}<br> {{item['marketId']}}</td>
+            <td>{{item['eventName']}}</td>
+            <td>{{item['competitionName']}}</td>
+            <td><span class="badge badge-pill badge-primary" style="padding:10px;font-size:12px;">{{item['sportName']}}</span></td>
+            <td>{{item['openDate'] | date :'dd/MM/yyyy h:mm:ss a'}}</td>
+            <td>{{item['isActive']?"OPEN":"CLOSE"}}</td>
+            <td>
+                <button type="button" class="btn btn-warning" *ngIf="!item['isActive']" (click)="addMatch(item)">Add</button>
+                <button type="button" class="btn btn-success" *ngIf="item['isActive']" disabled>Added</button>
+            </td>
+        </tr>
+        <!-- <tr>
+          <td>1.</td>
+          <td>31846601</td>
+          <td>Melbourne Renegades WBBL v Hobart Hurricanes WBBL</td>
+          <td>WBBL</td>
+          <td><span class="badge badge-pill badge-primary">Tennis</span></td>
+          <td>11/07/2022 01:40:00 PM</td>
+          <td>OPEN</td>
+          <td><button class="btn btn-success">Add</button></td>
+      </tr> -->
+
+    </table>
+</div>
+

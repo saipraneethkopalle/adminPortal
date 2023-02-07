@@ -1,0 +1,34 @@
+<app-navigation></app-navigation>
+<div class="main">
+<h1 style="padding:15px;">Match List <select id="sportfilter" (change)="getMatchesBySport($event)"><option>All</option><option value="4">Cricket</option><option value="2">Tennis</option><option value="1">Soccer</option></select></h1>
+
+    <table>
+        <tr class="table-header">
+            <th scope="col">#</th>
+            <th scope="col">Event ID</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Competition Name</th>
+            <th scope="col">Sport Name</th>
+            <th scope="col">Open Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+            <th scope="col" *ngIf="level == 1">RollBack</th>
+        </tr>
+        <tr *ngFor="let item of matchesData;let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{item.eventId}} <br> {{item.marketId}}</td>
+            <td>{{item.eventName}}</td>
+            <td>{{item.competitionName}}</td>
+            <td><span class="badge badge-pill badge-primary" style="padding:10px;font-size:12px;">{{item.sportName}}</span></td>
+            <td>{{item.openDate | date :'dd/MM/yyyy h:mm:ss a'}}</td>
+            <td>{{item.isActive}}</td>
+            <td><a routerLink="/match-activities/{{ item.eventId }}">
+                <button id="btn{{ i }}" class="btn btn-danger fbtn">Show Activities</button>
+             </a></td>
+            <td *ngIf="level == 1">
+                <button class="btn btn-primary" [style]="item.isActive?'opacity:0.5':'opacity:1'" [disabled]="item.isActive" (click)="rollBackMatch(item)">Rollback</button>
+            </td>
+        </tr>
+    </table>
+</div>
+

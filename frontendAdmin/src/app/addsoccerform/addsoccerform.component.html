@@ -1,0 +1,110 @@
+<app-navigation></app-navigation>
+<div class="card">
+  <div class="card-header bg-header text-white">Add Soccer Match</div>
+  <div class="card-body">
+    <form [formGroup]="Addwebsitenew" (ngSubmit)="addMatch()" method="post" autocomplete="off">
+      <div class="form-group">
+        <label for="eventId">Event Id:</label>
+        <input type="text" class="form-control" placeholder="Enter Event Id" formControlName="eventId">
+        <div class="error" *ngIf="submitted && f.eventId.errors">
+          <div class="text-danger" *ngIf="f.eventId.errors['required']">Event Id is required</div>
+          <div class="text-danger" *ngIf="f.eventId.errors['pattern']">Numeric Value Only</div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="marketId">Market Id:</label>
+        <input type="text" step="any" class="form-control" placeholder="Enter Market Id" formControlName="marketId">
+        <div class="error" *ngIf="submitted && f.marketId.errors">
+          <div class="text-danger" *ngIf="f.marketId.errors['required']">Market Id is required</div>
+          <div class="text-danger" *ngIf="f.marketId.errors['pattern']">Numeric Value Only</div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="eventname">Event Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Event Name" formControlName="eventname">
+        <div class="error" *ngIf="submitted && f.eventname.errors">
+          <div class="text-danger" *ngIf="f.eventname.errors['required']">Event Name is required</div>
+          <!-- <div class="text-danger" *ngIf="f.eventname.errors['pattern']">Numeric Value Only</div> -->
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="competitionid">Competition Id:</label>
+        <input type="text" class="form-control" placeholder="Enter Competition Id" formControlName="competitionid">
+        <div class="error" *ngIf="submitted && f.competitionid.errors">
+          <div class="text-danger" *ngIf="f.competitionid.errors['required']">Competetion Id is required</div>
+          <div class="text-danger" *ngIf="f.competitionid.errors['pattern']">Numeric Value Only</div>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="competitionname">Competition Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Competition Name" formControlName="competitionname">
+        <div class="error" *ngIf="submitted && f.competitionname.errors">
+          <div class="text-danger" *ngIf="f.competitionname.errors['required']">Competition Name is required</div>
+          <!-- <div class="text-danger" *ngIf="f.competitionname.errors['pattern']">Numeric Value Only</div> -->
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="openDate">Open Date:</label>
+        <input type="datetime-local" class="form-control" placeholder="YYY/MM/DD" formControlName="openDate">
+        <div class="error" *ngIf="submitted && f.openDate.errors">
+          <div class="text-danger" *ngIf="f.openDate.errors['required']">Open Date is required</div>
+          <!-- <div class="text-danger" *ngIf="f.openDate.errors['pattern']">Numeric Value Only</div> -->
+      </div>
+        
+      </div>
+      <div class="form-group">
+        <label for="eventType">Select Event Type:</label>
+        <select id="eventType" (change)="setRunners($event.target)" formControlName="eventType" class="form-control">
+          <!-- <option value="">select</option> -->
+          <option value="oneDay" [selected]="true">OneDay</option>
+          <option value="T20">T20</option>
+          <option value="Test">Test</option>
+        </select>
+        <div class="error" *ngIf="submitted && f.eventType.errors">
+          <div class="text-danger" *ngIf="f.eventType.errors['required']">Evnet Type is required</div>
+          <div class="text-danger" *ngIf="f.eventType.errors['pattern']">Numeric Value Only</div>
+      </div>
+      </div>
+      <div *ngIf="runnerToggle" class="form-group">
+        <label>Runner 1</label>
+        <input formControlName="runner1" type="text" class="form-control"
+            placeholder="Enter Runner 1">
+            <div class="error" *ngIf="submitted && f.runner1.errors">
+              <div class="text-danger" *ngIf="f.runner1.errors['required']">Runner1 is required</div>
+              <div class="text-danger" *ngIf="f.runner1.errors['pattern']">Numeric Value Only</div>
+          </div>
+        
+    </div>
+    <div *ngIf="runnerToggle" class="form-group">
+        <label>Runner 2</label>
+        <input formControlName="runner2" type="text" class="form-control"
+            placeholder="Enter Runner 2">
+            <div class="error" *ngIf="submitted && f.runner2.errors">
+              <div class="text-danger" *ngIf="f.runner2.errors['required']">Runner2 is required</div>
+              <!-- <div class="text-danger" *ngIf="f.runner2.errors['pattern']">Numeric Value Only</div> -->
+          </div>
+       
+    </div>
+    <div *ngIf="testToggle" class="form-group">
+        <label>Runner 3</label>
+        <input formControlName="runner3" type="text" class="form-control"
+            placeholder="Enter Runner 3">
+            <div class="error" *ngIf="submitted && f.runner3.errors">
+              <div class="text-danger" *ngIf="f.runner3.errors['required']">Runner3 is required</div>
+              <!-- <div class="text-danger" *ngIf="f.runner2.errors['pattern']">Numeric Value Only</div> -->
+          </div>
+
+       
+    </div>
+      <div class="form-group">
+        <label for="matchType">Select Match Type:</label>
+        <select id="matchType" formControlName="matchType" class="form-control"><option [selected]="true">Manual</option><option>Virtual</option><option>Casino</option><option>Premium</option></select>
+        <div class="error" *ngIf="submitted && f.matchType.errors">
+          <div class="text-danger" *ngIf="f.matchType.errors['required']">Match Type is required</div>
+          <!-- <div class="text-danger" *ngIf="f.runner2.errors['pattern']">Numeric Value Only</div> -->
+      </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

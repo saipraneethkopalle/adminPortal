@@ -1,0 +1,169 @@
+.heading{
+    background-color: green;
+}
+.cr{
+  font-size: 14px;
+}
+.dr{
+  width:125px;
+  height:35px;
+  font-size:14px;
+  margin-bottom:5px;
+}
+/* .btn-success{
+  width:125px;
+  height:35px;
+  font-size:12px;
+  padding:10px;
+  margin-bottom:5px;
+} */
+.runners{
+  width:100%;
+  text-align: left;
+   margin-right:auto;
+   display:block;
+   height: auto;
+   overflow: hidden;
+}
+.sus{
+  border:1px solid #5e7787;
+  padding:10px;
+  border-radius:4px;
+  height:38px;
+}
+.teamData{
+  width:49%;
+  float:left;
+  height:auto;
+  overflow:hidden;
+  display:block;
+  margin:0;
+  margin-right:10px;
+  margin-bottom:20px;
+}
+.teamData2{
+  width:49%;
+  float:left;
+  height:auto;
+  overflow:hidden;
+  display:block;
+  margin:0;
+  margin-right:10px;
+  margin-bottom:20px;
+}
+.teamData2 td{
+  font-weight: bold;
+}
+dl{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+  line-height: 3;
+  height:50px;
+}
+#bt{
+  margin-bottom:5px;
+  width:140px;
+  font-size: 14px;
+}
+.btn{
+  font-size:14px;
+}
+.light{
+  opacity: 0.5;
+}
+#btt{
+  font-size: 14px;
+  margin-bottom:5px;
+  width:110px;
+}
+.main{
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;
+    height:auto;
+    overflow: hidden;
+    padding:15px;
+    font-size: 18px;
+    /* font-family: Arial, Helvetica, sans-serif; */
+
+}
+
+table{
+    border-collapse: collapse;
+    width:100%;
+    /* border:1px solid; */
+    /* border-bottom:1px solid;*/
+    table-layout: initial;
+    font-size:14px;
+    height:100%;
+    -webkit-overflow-scrolling: touch;
+}
+tbody td{
+  font-size:14px;
+}
+.teamData td{
+  padding:15px;
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 1px solid #5e7787;
+  border-right: 1px solid #fff;
+  width:40%;
+}
+
+.table-header{
+  background: #31708f !important;
+  color: #fff;
+  width:100%;
+}
+
+th{
+    border: 1px solid rgb(175,175,175);
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+td{
+    border: 1px solid rgb(175, 175, 175);
+    padding: 15px 15px;
+    z-index: 1020;
+}
+
+tr:nth-child(even){
+    background: rgb(247, 245, 245);
+}
+
+#pts{
+    font-size: 25px;
+    text-align: left;
+}
+#yes{
+    background: rgb(89, 198, 202)
+
+}
+#no{
+    background: #f4a5db;
+
+}
+h1{
+    font-size: 30px;
+    text-align: left;
+    font-weight: 300;
+}
+
+#centralPannel{
+    font-size: 25px;
+}
+
+.uscore
+{
+    margin-top: 8px;
+    margin-bottom: 5px;
+    width: 100%;
+    background: #5cb85c;
+    border: none;
+    font-size:15px;
+    font-weight:400;
+    padding:0px;
+}

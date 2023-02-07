@@ -1,0 +1,38 @@
+#selectProvider{
+  width:230px;
+  height:35px;
+  font-size:16px;
+}
+.card{
+  color: black;
+  margin: auto;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 48.7%;
+  margin-top: 18px;
+  /* margin-left:20px; */
+  /* text-align: center; */
+  height:auto;
+  overflow: hidden;
+}
+
+.card-header{
+font-size: 14px;
+color: rgb(48, 46, 46);
+margin: 0;
+text-align: left;
+}
+.settings td{
+  width:50%;
+}
+.matchsettings td{
+  width:50%;
+}
+.matchsettings{
+  margin-bottom:10px;
+}
+#drop{
+  text-align:right;
+}
+.bg-header{
+  background-color:#31708f;
+}

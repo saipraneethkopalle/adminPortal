@@ -1,0 +1,130 @@
+<app-navigation></app-navigation>
+<div class="card">
+  <h5 class="card-header bg-header text-white">Settings</h5>
+  <div class="card-body">
+    <form method="post" autocomplete="off" (ngSubmit)="addProvider()"[formGroup]="oddProvider">
+    <table class="settings">
+      <tr >
+        <td><label>Odd Provider</label></td>
+        <td></td>
+        <td id="drop"><select id="selectProvider" formControlName="odd">
+            <option value="betfair" [selected]="providers.odds=='betfair'">Betfair</option>
+            <option value="tiger" [selected]="providers.odds=='tiger'" >Tiger</option>
+            <option value="diamond" [selected]="providers.odds=='diamond'">Diamond</option>
+            <option [selected]="providers.odds== 'sky'" value="sky">Sky</option>
+            <option [selected]="providers.odds== 'ryan'" value='ryan'>Ryan</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td><label>Fancy Provider</label></td>
+        <td></td>
+        <td id="drop"><select id="selectProvider" formControlName="fancy">
+          <option value="diamond" [selected]="providers.fancy=='diamond'">Diamond</option>
+            <option value="tiger" [selected]="providers.fancy=='tiger'" >Tiger</option>
+            <option value="sky3" [selected]="providers.fancy=='sky3'">Sky3</option>
+
+
+          </select></td>
+      </tr>
+      <tr>
+        <td><label>BookMaker Provider</label></td>
+        <td></td>
+        <td id="drop"><select id="selectProvider" formControlName="bookmaker">
+          <option [selected]="providers.bookmaker=='diamond'" value="diamond">Diamond</option>
+          <option [selected]="providers.bookmaker=='tiger'" value="tiger">Tiger</option>
+          <option [selected]="providers.bookmaker=='sky3'" value="sky3">Sky3</option>
+
+          </select></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td><button type="submit" class="btn btn-primary" style="background-color:#31708f;text-align:left;">Save</button></td><td></td>
+      </tr>
+
+    </table>
+  </form>
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-header bg-header text-white">Premium Allow</h5>
+  <div class="card-body">
+    <table>
+      <tr>
+        <td style="width:70%;">Tirtha Premium</td>
+        <td style="width:30%;"><button type="button" (click)="setTOn('true')" class="btn btn-success">On</button></td>
+        <td style="width:30%;"><button type="button" (click)="setTOff('false')" class="btn btn-danger">Off</button></td>
+      </tr>
+      <tr>
+        <td style="width:70%;">Ryan Premium</td>
+        <td style="width:30%;"><button type="button" (click)="setROn('true')" class="btn btn-success">On</button></td>
+        <td style="width:30%;"><button type="button"(click)="setROff('false')" class="btn btn-danger">Off</button></td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-header bg-header text-white">Add Match Settings</h5>
+  <div class="card-body">
+    <form method="post" autocomplete="off" (ngSubmit)="addMatchSetting()"[formGroup]="matchSettings">
+    <table class="matchsettings">
+      <tr >
+        <td><label>Cricket</label></td>
+        <td></td>
+        <td id="drop"><select id="selectProvider" formControlName="cricket">
+            <option value="auto" [selected]="matchSet.cricket=='auto'">Auto</option>
+            <option value="manual" [selected]="matchSet.cricket=='manual'" >Manual</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td><label>Soccer</label></td>
+        <td></td>
+        <td id="drop"><select id="selectProvider" formControlName="soccer">
+          <option value="auto" [selected]="matchSet.soccer=='auto'">Auto</option>
+          <option value="manual" [selected]="matchSet.soccer=='manual'" >Manual</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td><label>Tennis</label></td>
+        <td></td>
+        <td id="drop"><select id="selectProvider" formControlName="tennis">
+          <option value="auto" [selected]="matchSet.tennis=='auto'">Auto</option>
+          <option value="manual" [selected]="matchSet.tennis=='manual'">Manual</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td><button type="submit" class="btn btn-primary" style="background-color:#31708f;text-align:left;">Save</button></td><td></td>
+      </tr>
+
+    </table>
+  </form>
+  </div>
+</div>
+<br>

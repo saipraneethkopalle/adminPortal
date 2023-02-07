@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f5f5eb;
+}
+
+nav {
+  background-color: #31708f;
+}
+
+nav a {
+  font-size: 14px;
+  margin-right: 10px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.active {
+  font-weight: bold;
+}

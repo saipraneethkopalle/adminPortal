@@ -1,0 +1,25 @@
+<app-navigation></app-navigation><br><br>
+<div class="card">
+  <form  [formGroup]="login" (ngSubmit)="onLogin()"  action="" method="post">
+  <h5 class="card-header table-header text-white">Login</h5>
+  <div class="card-body">
+    <label class="user-text" >Username</label> <input class="user-input" type="text" name="username" formControlName="username">
+    <br>
+
+    <div class="buttonIn">
+      <label class="password-text">Password</label>
+      <input class="password-input" [type]="showPassword? 'text' : 'password' " name="password" formControlName="password">
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+        <i class="fa fa-eye-slash" *ngIf="showPassword" (click)="toggleShow()"></i>
+        <i class="fa fa-eye" *ngIf="!showPassword" (click)="toggleShow()"></i>
+      </button>
+    </div>
+    <br>
+
+
+    <button type="submit" class="loginbtn">Login</button>
+    <div class="error">{{isError}}</div>
+  </div>
+  </form>
+</div>
+

@@ -1,0 +1,32 @@
+.main{
+  width:90%;
+  margin-left:auto;
+  margin-right:auto;
+  height:auto;
+  padding-top:15px;
+  padding-bottom:15px;
+  padding-left:10px;
+  padding-right:10px;
+  overflow: hidden;
+}
+.block1,.block2,.block3{
+  width:100%;
+  padding:5px;
+  font-size:14px;
+}
+.selectweb{
+  font-size:14px;
+  width:100%;
+  height:auto;
+  overflow: hidden;
+  display:block;
+  padding:5px;
+}
+select{
+  font-size:14px;
+  width:160px;
+}
+h4{
+  font-size:16px;
+  padding:5px;
+}
