@@ -36,6 +36,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { FancyactivitiesComponent } from './fancyactivities/fancyactivities.component';
 import { RemoveNegativeSignDirective } from './unless.directive';
 import { ApiWhitelistComponent } from './api-whitelist/api-whitelist.component';
+import { MarketlistComponent } from './marketlist/marketlist.component';
 const config: SocketIoConfig = { url: 'http://localhost:7766', options: {} };
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ const config: SocketIoConfig = { url: 'http://localhost:7766', options: {} };
     FancyactivitiesComponent,
     SearchFilterPipe,
     RemoveNegativeSignDirective,
-    ApiWhitelistComponent
+    ApiWhitelistComponent,
+    MarketlistComponent
   ],
   imports: [
     BrowserModule,
