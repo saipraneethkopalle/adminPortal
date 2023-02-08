@@ -527,7 +527,18 @@ getMatchSettings() {
 getMarketData(id:any) {
   const url = `http://178.79.154.77/test/api/listmarket.php?id=32075199`
   return this.http.get(url)
-
+}
+createApiWhitelist(data:any){
+  const url = `${this.link}/api/v1/addApiWhitelist`;
+  return this.http.post(url,data,{headers:this.headers})
+}
+updateApiWhitelist(data:any){
+  const url = `${this.link}/api/v1/updateApiWhitelist`;
+  return this.http.post(url,data,{headers:this.headers})
+}
+getApiWhitelist(){
+  const url = `${this.link}/api/v1/getApiWhitelist`;
+  return this.http.get(url,{headers:this.headers})
 }
 }
 

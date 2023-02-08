@@ -2,7 +2,7 @@
 <div class="card">
   <div class="card-header bg-header text-white">Whitelist API</div>
   <div class="card-body">
-    <form [formGroup]="addApilist" method="post" autocomplete="off" >
+    <form [formGroup]="addApilist" method="post" autocomplete="off" (ngSubmit)="createWhitelist()" >
       <table id="domform"><tr>
         <td><label for="name">Customer Name:</label></td>
         <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control txt" placeholder="Enter Customer Name" formControlName="customerName"></td>
@@ -12,7 +12,7 @@
         </tr>
         <tr><td></td><td><br></td><td></td><td></td></tr>
         <tr ><td><label for="url">Set Permissions:</label></td>
-          <td style="padding-top:9px;"><input type="checkbox" class="check-left" /><p class="check-left2">Plan 1</p> <input type="checkbox" class="check-left" /><p class="check-left2">Plan 2</p> <input type="checkbox" class="check-left" /><p class="check-left2">Plan 3</p></td>
+          <td style="padding-top:9px;"><input type="checkbox" class="check-left" formControlName="plan1" style="pointer-events: none;"><p class="check-left2">Plan 1</p> <input type="checkbox" class="check-left" formControlName="plan2" style="pointer-events: none;"/><p class="check-left2">Plan 2</p> <input type="checkbox" class="check-left" formControlName="plan3" /><p class="check-left2">Plan 3</p></td>
      <td></td><td style="float: right;"><button type="submit" style="margin-right:8px;" class="btn btn-primary">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
       </tr>
       </table>
@@ -23,6 +23,40 @@
   <h2 style="text-align: left;">Whitelisted API's</h2>
   <table class="tab">
     <tr><th>S.no</th><th>Customer Name</th><th>IP</th><th>Permissions</th><th>Action</th></tr>
-    <tr *ngFor="let item of getWebsites;let i=index;"><td>{{i+1}}</td><td>{{item.customerName}</td><td>{{item.ipAddress}}</td><td><span *ngIf="item.plan1">Plan 1</span><span *ngIf="item.plan2">Plan 2</span><span *ngIf="item.plan3">Plan 3</span></td><td><button  class="btn btn-success">Update</button></td></tr>
+    <tr *ngFor="let item of getApislist;let i=index;"><td>{{i+1}}</td><td>{{item.customerName}}</td><td>{{item.ipAddress}}</td><td><span *ngIf="item.plan1" class="plan">Plan 1</span><span *ngIf="item.plan2" class="plan">Plan 2</span><span *ngIf="item.plan3" class="plan">Plan 3</span></td><td><button  class="btn btn-success" (click)="passcurrentCustomer(item)" data-toggle="modal" data-target="#apiModal">Update</button></td></tr>
   </table>
+</div>
+<div class="modal fade" id="apiModal" tabindex="-1" role="dialog" aria-labelledby="apiModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="passwordModalLabel">Update Customer Permissions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table id="domform2"><tr>
+          <td><label for="name">Customer Name:</label></td>
+          <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" (keyup)="updateValue(1,$event)" [value]="currentData?.customerName || ''" placeholder="Enter Customer Name" ></td>
+
+          <td><label for="url">IP:</label></td>
+          <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" (keyup)="updateValue(2,$event)" [value]="currentData?.ipAddress || ''" placeholder="Enter IP Address" ></td>
+          </tr>
+          <tr><td></td><td><br></td><td></td><td></td></tr>
+          <tr><td><label>Set Permissions:</label></td>
+            <td style="padding-top:9px;">
+              <input type="checkbox" class="check-left3" (click)="updateValue(3,$event)" [checked]="currentData?.plan1 || ''" />
+              <p class="check-left4">Plan 1</p>
+               <input type="checkbox" (click)="updateValue(4,$event)" class="check-left3" [checked]="currentData?.plan2 || ''" />
+               <p class="check-left4">Plan 2</p>
+               <input type="checkbox" class="check-left3" (click)="updateValue(5,$event)" [checked]="currentData?.plan3 || ''" />
+               <p class="check-left4">Plan 3</p></td>
+               <td></td><td></td></tr>
+               <tr><td></td><td></td>
+       <td></td><td style="float: right;"><button type="submit" style="margin-right:8px;" class="btn btn-primary" (click)="updateApilist()" data-dismiss="modal">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
+        </tr>
+        </table>
+    </div>
+  </div>
 </div>
