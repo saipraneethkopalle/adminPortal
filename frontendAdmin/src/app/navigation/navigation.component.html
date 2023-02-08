@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg" *ngIf="isAuthenticated" >
-  <nav id="navhead"><a class="navbar-brand" role="button">CENTRAL PANEL</a></nav>
+  <nav id="navhead"><a class="navbar-brand cp" role="button">CENTRAL PANEL</a></nav>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -53,6 +53,9 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/whitelist" routerLinkActive="active">Whitelist</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/apiwhiteList" routerLinkActive="active">Whitelist API</a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" routerLinkActive="active" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           BetFair
@@ -63,9 +66,7 @@
           <a class="dropdown-item" routerLink="/soccerlist" routerLinkActive="active" style="color:#212121;">Soccer</a>
         </div>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLink="/apiwhiteList" routerLinkActive="active">API Whitelist</a>
-      </li> -->
+
       <li class="nav-item">
         <a class="nav-link" routerLink="/userlist" routerLinkActive="active">User List</a>
       </li>

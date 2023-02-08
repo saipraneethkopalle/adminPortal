@@ -1,8 +1,11 @@
 #navhead{
-    width: 14%;
+    width: 12%;
     float:left;
 }
 #navbarNav{
     width:100%;
     float:left;
+}
+li a{
+  padding:2px !important;
 }

@@ -17,6 +17,7 @@ export class ApiWhitelistComponent implements OnInit {
   }
 
   addApilist = new FormGroup({
-    url: new FormControl('', Validators.required)
+    customerName: new FormControl('', Validators.required),
+    ipAddress: new FormControl('', Validators.required)
   });
 }
