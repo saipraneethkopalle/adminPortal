@@ -59,6 +59,7 @@ export class ApiWhitelistComponent implements OnInit {
         timer: 1500
       })
       this.getApislistdata();
+      this.addApilist.reset();
     })
     }
   }
@@ -103,6 +104,7 @@ export class ApiWhitelistComponent implements OnInit {
     this.apiService.updateApiWhitelist(payload).subscribe((res:any)=>{
 
       this.getApislistdata();
+      this.addApilist.reset();
       Swal.fire({
         icon: 'success',
         title: "Updated Successfully",
