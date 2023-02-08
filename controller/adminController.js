@@ -12,6 +12,8 @@ const matchLogsService = require("../services/matchLogsService");
 const matchService = require("../services/matchService");
 const matchLogs = require("../models/matchLogs");
 const activeFancy = require("../models/activeFancy");
+const apiWhiteList = require('../models/apiWhitelist');
+const whiteList = require("../models/whiteList");
 exports.addWhitelistWebsite = async (req, res) => {
   try {
     let obj = req.body;
@@ -985,4 +987,49 @@ exports.setAutoFancy = async (data) => {
   }
   await mlogs.save();
   return true;
+}
+exports.addApiWhiteList =async (req,res) =>{
+  try {
+    console.log("adding the white list data",req.body)
+    let data = new apiWhiteList(req.body)
+    await data.save()
+    return res.status(STATUS.OK).send({
+      message: 'Success',
+      data:data,
+      status: 1
+  });
+
+  } catch(err) {
+    return res.status(STATUS.BAD_REQUEST).send(err)
+
+
+  }
+}
+exports.getApiWhiteList =async (req,res) =>{
+  try {
+    let data = await apiWhiteList.find().lean().exec();
+    return res.status(STATUS.OK).send({
+      message:'Success',
+      data:data,
+      status:1
+    })
+  } catch(err) {
+    return res.status(STATUS.BAD_REQUEST).send(err)
+
+  }
+}
+exports.updateApiWhiteList =async (req,res) =>{
+  try {
+    console.log("updated ",req.body)
+    let data = await apiWhiteList.updateOne({_id:req.body._id},{$set:req.body})
+    return res.status(STATUS.OK).send({
+      message:'Success',
+      data:data,
+      status:1
+    })
+
+  } catch(err) {
+    return res.status(STATUS.BAD_REQUEST).send(err);
+
+  }
 }

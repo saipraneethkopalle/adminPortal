@@ -56,4 +56,7 @@ router.get("/getProcess", adminController.getProcess);
 router.put('/updateMatchSettings',adminController.updateMatchSettings)
 router.get('/getMatchSettings',adminController.getMatchSettings)
 router.get('/health',(req,res)=>{return res.send("Api working fine")}); // add new apis above
+router.post('/addApiWhitelist',adminController.addApiWhiteList)
+router.get('/getApiWhitelist',adminController.getApiWhiteList);
+router.put('/updateApiWhitelist',adminController.updateApiWhiteList)
 module.exports = router;
