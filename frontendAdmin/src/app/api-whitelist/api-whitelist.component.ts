@@ -42,15 +42,15 @@ export class ApiWhitelistComponent implements OnInit {
     }else{
       this.error = false;
       this.errorMessage = '';
+      // console.log("plan3",this.addApilist.value.plan3)
     let payload = {
       "customerName":this.addApilist.value.customerName,
       "ipAddress":this.addApilist.value.ipAddress,
       "plan1":this.addApilist.value.plan1,
       "plan2":this.addApilist.value.plan2,
-      "plan3":this.addApilist.value.plan3 == '' || null ? false : this.addApilist.value.plan3
+      "plan3":this.addApilist.value.plan3 == '' ? false : this.addApilist.value.plan3 == null ? false :this.addApilist.value.plan3
     }
     // console.log("created",payload);
-    this.getApislist = [payload];
     this.apiService.createApiWhitelist(payload).subscribe((res:any)=>{
       Swal.fire({
         icon: 'success',
