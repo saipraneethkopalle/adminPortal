@@ -35,6 +35,13 @@ export class ApiWhitelistComponent implements OnInit {
     plann3:new FormControl('')
   });
   createWhitelist(){
+    if(this.addApilist.invalid){
+      console.log("error",this.addApilist.errors);
+      this.error = true;
+      this.errorMessage = "Please enter mandatory fields";
+    }else{
+      this.error = false;
+      this.errorMessage = '';
     let payload = {
       "customerName":this.addApilist.value.customerName,
       "ipAddress":this.addApilist.value.ipAddress,
@@ -53,6 +60,7 @@ export class ApiWhitelistComponent implements OnInit {
       })
       this.getApislistdata();
     })
+    }
   }
   getApislistdata(){
     this.apiService.getApiWhitelist().subscribe((res:any)=>{
@@ -88,15 +96,16 @@ export class ApiWhitelistComponent implements OnInit {
       "ipAddress":this.updateApi.value.ipAddress2 == '' ? this.currentData.ipAddress : this.updateApi.value.ipAddress2,
       "plan1":this.updateApi.value.plann1,
       "plan2":this.updateApi.value.plann2,
-      "plan3":this.updateApi.value.plann3
+      "plan3":this.updateApi.value.plann3 == '' ? this.currentData.plan3 : this.updateApi.value.plann3
     }
     // console.log("update",payload)
     // this.currentData = payload;
     this.apiService.updateApiWhitelist(payload).subscribe((res:any)=>{
+
       this.getApislistdata();
       Swal.fire({
         icon: 'success',
-        title: "Updateed Successfully",
+        title: "Updated Successfully",
         showConfirmButton: false,
         timer: 1500
       })
