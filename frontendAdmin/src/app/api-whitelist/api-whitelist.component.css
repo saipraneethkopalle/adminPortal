@@ -88,4 +88,10 @@ table tr{
 }
 .plan{
   padding-right:10px;
+  border:1px solid #31708f;
+  border-radius: 50px 50px;
+  padding:8px;
+  font-size:12px;
+  font-weight: bold;
+  margin-right:5px;
 }
