@@ -51,6 +51,7 @@ export class ApiWhitelistComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
+      this.getApislistdata();
     })
   }
   getApislistdata(){
@@ -91,7 +92,7 @@ export class ApiWhitelistComponent implements OnInit {
     // console.log("update",payload)
     // this.currentData = payload;
     this.apiService.updateApiWhitelist(payload).subscribe((res:any)=>{
-      this.getApislist();
+      this.getApislistdata();
       Swal.fire({
         icon: 'success',
         title: "Updateed Successfully",
