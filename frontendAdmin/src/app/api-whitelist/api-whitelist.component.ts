@@ -81,8 +81,9 @@ export class ApiWhitelistComponent implements OnInit {
   //   }
   // }
 
-  updateApilist(){
+  updateApilist(id:any){
     let payload = {
+      "_id":id,
       "customerName":this.updateApi.value.customerName2 == '' ? this.currentData.customerName : this.updateApi.value.customerName2,
       "ipAddress":this.updateApi.value.ipAddress2 == '' ? this.currentData.ipAddress : this.updateApi.value.ipAddress2,
       "plan1":this.updateApi.value.plann1,

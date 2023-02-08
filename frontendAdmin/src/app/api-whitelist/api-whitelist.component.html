@@ -44,7 +44,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="updateApi" method="post" autocomplete="off" (ngSubmit)="updateApilist()">
+        <form [formGroup]="updateApi" method="post" autocomplete="off" (ngSubmit)="updateApilist(currentData._id)">
         <table id="domform2"><tr>
           <td><label for="name">Customer Name:</label></td>
           <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" formControlName="customerName2" [value]="currentData?.customerName" placeholder="Enter Customer Name" ></td>
@@ -63,7 +63,7 @@
                <p class="check-left4">Plan 3</p></td>
                <td></td><td></td></tr>
                <tr><td></td><td></td>
-       <td></td><td style="float: right;"><button type="submit" (click)="updateApilist()" style="margin-right:8px;" class="btn btn-primary" data-dismiss="modal">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
+       <td></td><td style="float: right;"><button type="submit" (click)="updateApilist(currentData._id)" style="margin-right:8px;" class="btn btn-primary" data-dismiss="modal">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
         </tr>
         </table>
         </form>
