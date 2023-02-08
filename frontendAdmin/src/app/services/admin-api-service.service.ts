@@ -534,7 +534,7 @@ createApiWhitelist(data:any){
 }
 updateApiWhitelist(data:any){
   const url = `${this.link}/api/v1/updateApiWhitelist`;
-  return this.http.post(url,data,{headers:this.headers})
+  return this.http.put(url,data,{headers:this.headers})
 }
 getApiWhitelist(){
   const url = `${this.link}/api/v1/getApiWhitelist`;
