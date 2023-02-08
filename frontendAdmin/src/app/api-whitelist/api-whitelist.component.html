@@ -5,15 +5,23 @@
     <form [formGroup]="addApilist" method="post" autocomplete="off" (ngSubmit)="createWhitelist()" >
       <table id="domform"><tr>
         <td><label for="name">Customer Name:</label></td>
-        <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control txt" placeholder="Enter Customer Name" formControlName="customerName"></td>
+        <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control txt"  placeholder="Enter Customer Name" formControlName="customerName"></td>
 
         <td><label for="url">IP:</label></td>
         <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control txt" placeholder="Enter IP Address" formControlName="ipAddress"></td>
         </tr>
         <tr><td></td><td><br></td><td></td><td></td></tr>
         <tr ><td><label for="url">Set Permissions:</label></td>
-          <td style="padding-top:9px;"><input type="checkbox" class="check-left" formControlName="plan1" style="pointer-events: none;"><p class="check-left2">Plan 1</p> <input type="checkbox" class="check-left" formControlName="plan2" style="pointer-events: none;"/><p class="check-left2">Plan 2</p> <input type="checkbox" class="check-left" formControlName="plan3" /><p class="check-left2">Plan 3</p></td>
-     <td></td><td style="float: right;"><button type="submit" style="margin-right:8px;" class="btn btn-primary">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
+          <td style="padding-top:9px;">
+            <input type="checkbox" class="check-left" formControlName="plan1" style="pointer-events: none;"><p class="check-left2">Plan 1</p>
+            <input type="checkbox" class="check-left" formControlName="plan2" style="pointer-events: none;"/><p class="check-left2">Plan 2</p>
+            <input type="checkbox" class="check-left" formControlName="plan3" /><p class="check-left2">Plan 3</p>
+          </td>
+          <td></td>
+          <td style="float: right;">
+          <button type="submit" style="margin-right:8px;" class="btn btn-primary">Submit</button>
+          </td>
+          <td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
       </tr>
       </table>
     </form>
@@ -36,27 +44,29 @@
         </button>
       </div>
       <div class="modal-body">
+        <form [formGroup]="updateApi" method="post" autocomplete="off" (ngSubmit)="updateApilist()">
         <table id="domform2"><tr>
           <td><label for="name">Customer Name:</label></td>
-          <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" (keyup)="updateValue(1,$event)" [value]="currentData?.customerName || ''" placeholder="Enter Customer Name" ></td>
+          <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" formControlName="customerName2" [value]="currentData?.customerName" placeholder="Enter Customer Name" ></td>
 
           <td><label for="url">IP:</label></td>
-          <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" (keyup)="updateValue(2,$event)" [value]="currentData?.ipAddress || ''" placeholder="Enter IP Address" ></td>
+          <td style="padding-left:10px;padding-right:10px;"><input type="text" class="form-control" formControlName="ipAddress2" [value]="currentData?.ipAddress" placeholder="Enter IP Address" ></td>
           </tr>
           <tr><td></td><td><br></td><td></td><td></td></tr>
           <tr><td><label>Set Permissions:</label></td>
             <td style="padding-top:9px;">
-              <input type="checkbox" class="check-left3" (click)="updateValue(3,$event)" [checked]="currentData?.plan1 || ''" />
+              <input type="checkbox" class="check-left3" formControlName="plann1" [checked]="currentData?.plan1 || ''" />
               <p class="check-left4">Plan 1</p>
-               <input type="checkbox" (click)="updateValue(4,$event)" class="check-left3" [checked]="currentData?.plan2 || ''" />
+               <input type="checkbox" formControlName="plann2" class="check-left3" [checked]="currentData?.plan2 || ''" />
                <p class="check-left4">Plan 2</p>
-               <input type="checkbox" class="check-left3" (click)="updateValue(5,$event)" [checked]="currentData?.plan3 || ''" />
+               <input type="checkbox" class="check-left3" formControlName="plann3" [checked]="currentData?.plan3 || ''" />
                <p class="check-left4">Plan 3</p></td>
                <td></td><td></td></tr>
                <tr><td></td><td></td>
-       <td></td><td style="float: right;"><button type="submit" style="margin-right:8px;" class="btn btn-primary" (click)="updateApilist()" data-dismiss="modal">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
+       <td></td><td style="float: right;"><button type="submit" (click)="updateApilist()" style="margin-right:8px;" class="btn btn-primary" data-dismiss="modal">Submit</button></td><td *ngIf="error" style="color:red;font-size:12px;"> {{errorMessage}}</td>
         </tr>
         </table>
+        </form>
     </div>
   </div>
 </div>

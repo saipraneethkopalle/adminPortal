@@ -17,7 +17,7 @@ export class ApiWhitelistComponent implements OnInit {
   constructor(private apiService:AdminApiServiceService) { }
 
   ngOnInit(): void {
-    // this.getApiWhitelist();
+    this.getApislistdata();
   }
 
   addApilist = new FormGroup({
@@ -27,27 +27,33 @@ export class ApiWhitelistComponent implements OnInit {
     plan2:new FormControl(true),
     plan3:new FormControl('')
   });
-
+  updateApi = new FormGroup({
+    customerName2: new FormControl('', Validators.required),
+    ipAddress2: new FormControl('', Validators.required),
+    plann1:new FormControl(true),
+    plann2:new FormControl(true),
+    plann3:new FormControl('')
+  });
   createWhitelist(){
     let payload = {
       "customerName":this.addApilist.value.customerName,
       "ipAddress":this.addApilist.value.ipAddress,
       "plan1":this.addApilist.value.plan1,
       "plan2":this.addApilist.value.plan2,
-      "plan3":this.addApilist.value.plan3
+      "plan3":this.addApilist.value.plan3 == '' ? false : this.addApilist.value.plan3
     }
-    console.log("created",payload);
+    // console.log("created",payload);
     this.getApislist = [payload];
-    // this.apiService.createApiWhitelist(payload).subscribe((res:any)=>{
-    //   Swal.fire({
-    //     icon: 'success',
-    //     title: "Added Successfully",
-    //     showConfirmButton: false,
-    //     timer: 1500
-    //   })
-    // })
+    this.apiService.createApiWhitelist(payload).subscribe((res:any)=>{
+      Swal.fire({
+        icon: 'success',
+        title: "Added Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
   }
-  getApiWhitelist(){
+  getApislistdata(){
     this.apiService.getApiWhitelist().subscribe((res:any)=>{
       this.getApislist = res.data;
     })
@@ -55,34 +61,43 @@ export class ApiWhitelistComponent implements OnInit {
   passcurrentCustomer(data:any){
     this.currentData = data;
   }
-  updateValue(field:any,value:any){
-    console.log("changed",field,value.target.value);
-    if(field == 1 && value.target.value != null){
-      this.currentData.customerName = value.target.value
-    }
-    if(field == 2 && value.target.value != null){
-      this.currentData.ipAddress = value.target.value
-    }
-    if(field == 3){
-      this.currentData.plan1 = value.target.value == "on" ? true : false;
-    }
-    if(field == 4){
-      this.currentData.plan2 = value.target.value == "on" ? true : false;
-    }
-    if(field == 5){
-      this.currentData.plan3 = value.target.value == "on" ? true : false;
-    }
-  }
+  // updateValue(field:any,value:any){
+  //   console.log("changed",field,value.target.value);
+  //   if(field == 1 && value.target.value != null){
+  //     this.currentData.customerName = value.target.value
+  //   }
+  //   if(field == 2 && value.target.value != null){
+  //     this.currentData.ipAddress = value.target.value
+  //   }
+  //   if(field == 3){
+  //     this.currentData.plan1 = value.target.value == "on" ? true : false;
+  //   }
+  //   if(field == 4){
+  //     this.currentData.plan2 = value.target.value == "on" ? true : false;
+  //   }
+  //   if(field == 5){
+  //     this.currentData.plan3 = value.target.value == "on" ? true : false;
+  //   }
+  // }
 
   updateApilist(){
-    console.log("updating",this.currentData);
-    // this.apiService.updateApiWhitelist(this.currentData).subscribe((res:any)=>{
-    //   Swal.fire({
-    //     icon: 'success',
-    //     title: "Updateed Successfully",
-    //     showConfirmButton: false,
-    //     timer: 1500
-    //   })
-    // })
+    let payload = {
+      "customerName":this.updateApi.value.customerName2 == '' ? this.currentData.customerName : this.updateApi.value.customerName2,
+      "ipAddress":this.updateApi.value.ipAddress2 == '' ? this.currentData.ipAddress : this.updateApi.value.ipAddress2,
+      "plan1":this.updateApi.value.plann1,
+      "plan2":this.updateApi.value.plann2,
+      "plan3":this.updateApi.value.plann3
+    }
+    // console.log("update",payload)
+    // this.currentData = payload;
+    this.apiService.updateApiWhitelist(payload).subscribe((res:any)=>{
+      this.getApislist();
+      Swal.fire({
+        icon: 'success',
+        title: "Updateed Successfully",
+        showConfirmButton: false,
+        timer: 1500
+      })
+    })
   }
 }
