@@ -96,10 +96,10 @@ export class ApiWhitelistComponent implements OnInit {
       "ipAddress":this.updateApi.value.ipAddress2 == '' ? this.currentData.ipAddress : this.updateApi.value.ipAddress2,
       "plan1":this.updateApi.value.plann1,
       "plan2":this.updateApi.value.plann2,
-      "plan3":this.updateApi.value.plann3 == '' ? this.currentData.plan3 : this.updateApi.value.plann3
+      "plan3":this.updateApi.value.plann3 == '' ? false : this.updateApi.value.plann3
     }
     // console.log("update",payload)
-    // this.currentData = payload;
+    this.currentData = payload;
     this.apiService.updateApiWhitelist(payload).subscribe((res:any)=>{
 
       this.getApislistdata();
