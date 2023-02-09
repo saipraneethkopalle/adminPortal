@@ -17,7 +17,10 @@ exports.getDFancyBM = async(req,res)=>{
 exports.getSFancyBM = async(req,res)=>{
     try{
         let sFancy = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-sky'))
+        // let s3Fancy = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-sk'))
+        // let sky2 = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-sky2'))
         let sBM = JSON.parse(await redisdb.GetRedis('BM-' + req.params.marketId + '-sky'))
+        // let s3BM = JSON.parse(await redisdb.GetRedis('BM-' + req.params.marketId + '-sk'))
         let result = {
             "message":"Sky Result fetched",
             "data":{"Fancy":sFancy,"BookMaker":sBM}
@@ -45,7 +48,7 @@ exports.getWFancyBM = async(req,res)=>{
 
 exports.getRyan = async(req,res)=>{
     try{
-        let ryandata = JSON.parse(await redisdb.get('Odds-' + key + '-ryan'))
+        let ryandata = JSON.parse(await redisdb.GetRedis('Odds-' + req.params.marketId + '-ryan'))
         let result = {
             "message":"Ryan details fetched",
             "data":{"ryan":ryandata}
@@ -57,7 +60,7 @@ exports.getRyan = async(req,res)=>{
 }
 exports.getTiger = async(req,res)=>{
     try{
-        let tigerdata = JSON.parse(await redisdb.get('Odds-' + key + '-tiger'))
+        let tigerdata = JSON.parse(await redisdb.GetRedis('Odds-' + req.params.marketId + '-tiger'))
         let result = {
             "message":"Tiger details fetched",
             "data":{"tiger":tigerdata}
@@ -69,7 +72,7 @@ exports.getTiger = async(req,res)=>{
 }
 exports.getBetfair = async(req,res)=>{
     try{
-        let betfairdata = JSON.parse(await redisdb.get('Odds-' + key + '-betfair'))
+        let betfairdata = JSON.parse(await redisdb.GetRedis('Odds-' + req.params.marketId + '-betfair'))
         let result = {
             "message":"Betfair details fetched",
             "data":{"betfair":betfairdata}

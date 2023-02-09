@@ -167,7 +167,9 @@ const getFancyData = async (marketIds) => {
             fancyData[key].diamond && redisdb.SetRedisEx('Fancy-' + key + '-diamond', fancyData[key].diamond, 3)
             fancyData[key].skyf && redisdb.SetRedisEx('Fancy-' + key + '-sky', fancyData[key].skyf, 3)
             fancyData[key].skyo && redisdb.SetRedisEx('Odds-' + key + '-sky', fancyData[key].skyo, 3)
-            fancyData[key].skyb && redisdb.SetRedisEx('BM-' + key + '-sky', fancyData[key].skyb, 3)            
+            fancyData[key].skyb && redisdb.SetRedisEx('BM-' + key + '-sky', fancyData[key].skyb, 3)
+            fancyData[key].world && redisdb.SetRedisEx('Fancy-' + key + '-world', fancyData[key].world, 'EX', 5)
+            fancyData[key].bull && redisdb.SetRedisEx('Fancy-' + key + '-bull', fancyData[key].bull, 'EX', 5)            
         });
     }
     catch (err) {
