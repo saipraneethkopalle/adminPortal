@@ -88,9 +88,8 @@ exports.getVirtualMatches = async(req,res)=>{
         let virtualdata = JSON.parse(await redisdb.GetRedis("virtualMatches"));
         // virtualdata = JSON.parse(virtualdata);
         return res.status(STATUS.OK).send({
-            message:"Success",
+            message:"Virtual details fetched",
             data:virtualdata,
-            status:1
         })
     }catch(err) {        
         return res.status(STATUS.BAD_REQUEST).send(err)
