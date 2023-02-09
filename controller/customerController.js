@@ -20,7 +20,7 @@ exports.getSFancyBM = async(req,res)=>{
     }
 }
 
-exports.getVirtualCricket = async(req,res)=>{
+exports.getVirtualMatches = async(req,res)=>{
     try {
         let virtualdata = JSON.parse(await redisdb.get("virtualMatches"));
         // virtualdata = JSON.parse(virtualdata);
