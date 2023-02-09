@@ -84,7 +84,7 @@ exports.getBetfair = async(req,res)=>{
 }
 exports.getVirtualMatches = async(req,res)=>{
     try {
-        console.log("virtual");
+        // console.log("virtual");
         let virtualdata = JSON.parse(await redisdb.GetRedis("virtualMatches"));
         // virtualdata = JSON.parse(virtualdata);
         return res.status(STATUS.OK).send({
