@@ -11,6 +11,7 @@ const axios = Raxios.create({
     timeout: 2000,
 });
 const moment = require('moment');
+moment.suppressDeprecationWarnings = true;
 const { setIntervalAsync, clearIntervalAsync } = require('set-interval-async/dynamic');
 const config= {headers:{
   Authorization: "Bearer BekarHaiMutualFunds",
@@ -168,12 +169,11 @@ const getFancyData = async (marketIds) => {
             fancyData[key].skyf && redisdb.SetRedisEx('Fancy-' + key + '-sky', fancyData[key].skyf, 3)
             fancyData[key].skyo && redisdb.SetRedisEx('Odds-' + key + '-sky', fancyData[key].skyo, 3)
             fancyData[key].skyb && redisdb.SetRedisEx('BM-' + key + '-sky', fancyData[key].skyb, 3)
-            fancyData[key].world && redisdb.SetRedisEx('Fancy-' + key + '-world', fancyData[key].world, 'EX', 5)
-            fancyData[key].bull && redisdb.SetRedisEx('Fancy-' + key + '-bull', fancyData[key].bull, 'EX', 5)            
+            fancyData[key].world && redisdb.SetRedisEx('Fancy-' + key + '-world', fancyData[key].world, 5)            
         });
     }
     catch (err) {
-        // console.log("here is",err);
+        // console.log("here is",err.message);
     }
 }
 const getSky2Fancy = async (marketIds) => {

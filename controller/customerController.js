@@ -3,44 +3,49 @@ const redisdb = require("../constants/redis-db");
 
 exports.getDFancyBM = async(req,res)=>{
     try{
-        let dFancy = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-diamond'))
-        let dBM = JSON.parse(await redisdb.GetRedis('BM-' + req.params.marketId + '-diamond'))
+        let ids = (req.params.marketId).split(',')
+        // console.log("m",ids);
+        let dFancy = await getMultiMarkets(ids,'Fancy-','-diamond')
+        let dBM = await getMultiMarkets(ids,'BM-','-diamond')
         let result = {
             "message":"Diamond Result fetched",
             "data":{"Fancy":dFancy,"BookMaker":dBM}
         }
         return res.status(STATUS.OK).send(result)
     }catch(err){
+        console.log("err",err);
         return res.status(STATUS.BAD_REQUEST).send(err)
     }
 }
 exports.getSFancyBM = async(req,res)=>{
-    try{
-        let sFancy = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-sky'))
-        // let s3Fancy = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-sk'))
-        // let sky2 = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-sky2'))
-        let sBM = JSON.parse(await redisdb.GetRedis('BM-' + req.params.marketId + '-sky'))
-        // let s3BM = JSON.parse(await redisdb.GetRedis('BM-' + req.params.marketId + '-sk'))
+    try{ 
+        let ids = (req.params.marketId).split(',')
+        let sFancy = await getMultiMarkets(ids,'Fancy-','-sky')
+        let s3Fancy = await getMultiMarkets(ids,'Fancy-','-sk')
+        let sky2 = await getMultiMarkets(ids,'Fancy-','-sky2')
+        let fancy ={"sky":sFancy,"sky3":s3Fancy,"sky2":sky2}
+        let sBM =await getMultiMarkets(ids,'BM-','-sky')
+        let s3BM = await getMultiMarkets(ids,'BM-','-sk')
+        let bm = {"sky":sBM,"sky3":s3BM}
         let result = {
             "message":"Sky Result fetched",
-            "data":{"Fancy":sFancy,"BookMaker":sBM}
+            "data":{"Fancy":fancy,"BookMaker":bm}
         }
         return res.status(STATUS.OK).send(result)
-        return res.status(STATUS.OK).send(err)
     }catch(err){
         return res.status(STATUS.BAD_REQUEST).send(err)
     }
 }
 exports.getWFancyBM = async(req,res)=>{
     try{
-        let sFancy = JSON.parse(await redisdb.GetRedis('Fancy-' + req.params.marketId + '-world'))
-        let sBM = JSON.parse(await redisdb.GetRedis('BM-' + req.params.marketId + '-world'))
+        let ids = (req.params.marketId).split(',')
+        let sFancy = await getMultiMarkets(ids,'Fancy-','-world')     
+        let sBM = await getMultiMarkets(ids,'BM-','-world')     
         let result = {
             "message":"World Result fetched",
             "data":{"Fancy":sFancy,"BookMaker":sBM}
         }
         return res.status(STATUS.OK).send(result)
-        return res.status(STATUS.OK).send(err)
     }catch(err){
         return res.status(STATUS.BAD_REQUEST).send(err)
     }
@@ -48,19 +53,23 @@ exports.getWFancyBM = async(req,res)=>{
 
 exports.getRyan = async(req,res)=>{
     try{
-        let ryandata = JSON.parse(await redisdb.GetRedis('Odds-' + req.params.marketId + '-ryan'))
+        let ids = (req.params.marketId).split(',');
+        // console.log("ids",ids,"length",ids.length);
+        let ryandata = await getMultiMarkets(ids,'Odds-','-ryan')     
         let result = {
             "message":"Ryan details fetched",
             "data":{"ryan":ryandata}
         }
         return res.status(STATUS.OK).send(result)
     }catch(err){
+        console.log("testing",err);
         return res.status(STATUS.BAD_REQUEST).send(err)
     }
 }
 exports.getTiger = async(req,res)=>{
     try{
-        let tigerdata = JSON.parse(await redisdb.GetRedis('Odds-' + req.params.marketId + '-tiger'))
+        let ids = (req.params.marketId).split(',');
+        let tigerdata = await getMultiMarkets(ids,'Odds-','-tiger')
         let result = {
             "message":"Tiger details fetched",
             "data":{"tiger":tigerdata}
@@ -72,7 +81,8 @@ exports.getTiger = async(req,res)=>{
 }
 exports.getBetfair = async(req,res)=>{
     try{
-        let betfairdata = JSON.parse(await redisdb.GetRedis('Odds-' + req.params.marketId + '-betfair'))
+        let ids = (req.params.marketId).split(',');
+        let betfairdata = await getMultiMarkets(ids,'Odds-','-betfair')
         let result = {
             "message":"Betfair details fetched",
             "data":{"betfair":betfairdata}
@@ -94,4 +104,13 @@ exports.getVirtualMatches = async(req,res)=>{
     }catch(err) {        
         return res.status(STATUS.BAD_REQUEST).send(err)
     }
+}
+
+const getMultiMarkets = async(arr,first,last)=>{
+    let result=[];
+    for(let i=0;i<arr.length;i++){
+        let data =JSON.parse(await redisdb.GetRedis(first + arr[i] + last))
+        let getdata =data != null ? Array.isArray(data) ? result.push(data[0]):result.push(data): []
+    }
+    return result;
 }
