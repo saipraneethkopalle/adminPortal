@@ -59,9 +59,4 @@ router.get('/health',(req,res)=>{return res.send("Api working fine")}); // add n
 router.post('/addApiWhitelist',adminController.addApiWhiteList)
 router.get('/getApiWhitelist',adminController.getApiWhiteList);
 router.put('/updateApiWhitelist',adminController.updateApiWhiteList)
-router.get("/getCOdds", adminController.getCOdds);
-router.get("/getMOdds", adminController.getMOdds);
-router.get("/getBOdds", adminController.getBOdds);
-router.get("/getNNOdds", adminController.getNNOdds);
-router.get("/getDBM", adminController.getDBM);
 module.exports = router;
