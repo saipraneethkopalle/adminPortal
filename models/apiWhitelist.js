@@ -5,7 +5,7 @@ const apiWhiteListSchema = mongoose.Schema({
    ipAddress:{type:String,required:true,unique:true},
    plan1:{type:Boolean,default:true},
    plan2:{type:Boolean,default:true},
-   plan3:{type:Boolean,required:true},
+   plan3:{type:Boolean},
    createdAt:{type:Date,default:Date.now}
 //    date : { type: Date, default: Date.now }
 });
