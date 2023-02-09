@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const compression = require('compression');
 const cluster = require("cluster");
 const router = require("./routes/routes");
+const customerRouter = require("./routes/customerApis");
 const auth = require("./constants/auth");
 const login = require("./routes/beforeAuth")
 const redisdb = require("./constants/redis-db");
@@ -28,6 +29,7 @@ app.use(express.json())
 app.use(cors());
 app.use("/api/v1", auth);
 app.use("/api/v1", router);
+app.use("/api/v1", customerRouter);
 app.use("/api/beforelogin", login);
 
 const http = require('http').Server(app);
