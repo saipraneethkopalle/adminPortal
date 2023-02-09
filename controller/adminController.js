@@ -1033,3 +1033,40 @@ exports.updateApiWhiteList =async (req,res) =>{
 
   }
 }
+exports.getCOdds = async (req,res)=>{
+  try {
+
+  }catch(err) {
+
+  }
+}
+exports.getMOdds = async (req,res)=>{
+  try {
+
+  }catch(err) {
+    
+  }
+}
+exports.getBOdds = async (req,res)=>{
+  try {
+
+  }catch(err) {
+    
+  }
+}
+
+exports.getNNOdds = async (req,res)=>{
+  try {
+
+  }catch(err) {
+    
+  }
+}
+
+exports.getDBM = async (req,res)=>{
+  try {
+
+  }catch(err) {
+    
+  }
+}

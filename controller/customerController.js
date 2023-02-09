@@ -19,3 +19,18 @@ exports.getSFancyBM = async(req,res)=>{
         return res.status(STATUS.BAD_REQUEST).send(err)
     }
 }
+
+exports.getVirtualCricket = async(req,res)=>{
+    try {
+        let virtualdata = JSON.parse(await redisdb.get("virtualMatches"));
+        // virtualdata = JSON.parse(virtualdata);
+        return res.status(STATUS.OK).send({
+            message:"Success",
+            data:virtualdata,
+            status:1
+        })
+
+    }catch(err) {
+
+    }
+}
