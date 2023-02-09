@@ -9,3 +9,5 @@ router.get('/getRyan/:marketId',customerController.getRyan);
 router.get('/getTiger/:marketId',customerController.getTiger);
 router.get('/getBetfair/:marketId',customerController.getBetfair);
 router.get('/getVirtualMatches',customerController.getVirtualMatches);
+
+module.exports = router;

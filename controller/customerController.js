@@ -81,15 +81,15 @@ exports.getBetfair = async(req,res)=>{
 }
 exports.getVirtualMatches = async(req,res)=>{
     try {
-        let virtualdata = JSON.parse(await redisdb.get("virtualMatches"));
+        console.log("virtual");
+        let virtualdata = JSON.parse(await redisdb.GetRedis("virtualMatches"));
         // virtualdata = JSON.parse(virtualdata);
         return res.status(STATUS.OK).send({
             message:"Success",
             data:virtualdata,
             status:1
         })
-
-    }catch(err) {
-
+    }catch(err) {        
+        return res.status(STATUS.BAD_REQUEST).send(err)
     }
 }

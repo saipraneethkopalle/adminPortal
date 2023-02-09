@@ -29,7 +29,7 @@ app.use(express.json())
 app.use(cors());
 app.use("/api/v1", auth);
 app.use("/api/v1", router);
-app.use("/api/v1", customerRouter);
+app.use("/api/v1-custom", customerRouter);
 app.use("/api/beforelogin", login);
 
 const http = require('http').Server(app);
