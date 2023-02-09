@@ -88,16 +88,16 @@ const autoRemove = async () => {
         const matches = JSON.parse(await redisdb.GetRedis('ActiveMatches')) != null ? JSON.parse(await redisdb.GetRedis('ActiveMatches')):[];
         const test = matches.filter(dt => dt.sportId != '4' && !dt.marketName.includes('Winner'));
         // console.log(test);
-        console.log("all",matches.length);
+        // console.log("all",matches.length);
         let st = matches.filter(dt => dt.sportId != '4' && !dt.marketName.includes('Winner')).map(mt => {
             return { ...mt, expireUnix: moment(mt.openDate, "MM/DD/YYYY HH:mm:ss A").add(480, 'm').unix() };
         }).filter(mtch => mtch.expireUnix < currentUnix);    
         const mt = matches.filter(dt => dt.sportId == '4' && dt.matchRunners.length==2).map(ct => {
-            console.log("days",moment().diff(moment(ct.openDate),'days'),"date",ct.openDate,ct.eventId)
+            // console.log("days",moment().diff(moment(ct.openDate),'days'),"date",ct.openDate,ct.eventId)
             return ct;
           }).filter(mtch =>moment().diff(moment(mtch.openDate),'days') >= 1);
           const t = matches.filter(dt => dt.sportId == '4' && dt.matchRunners.length >=3).map(tt => {
-            console.log("days2",moment().diff(moment(tt.openDate),'days'),"date",tt.openDate,tt.eventId)
+            // console.log("days2",moment().diff(moment(tt.openDate),'days'),"date",tt.openDate,tt.eventId)
               return tt;
           }).filter(mtch =>moment().diff(moment(mtch.openDate),'days') >= 6);
           st = [...st,...mt,...t]
