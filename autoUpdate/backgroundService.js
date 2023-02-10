@@ -226,6 +226,36 @@ setIntervalAsync(async () => {
         // console.log("err1",err);
     }
 }, 350);
+
+const getVirtual = async (matches) => {
+    try {
+        const eventIds = matches.map(dt => (dt.eventId));
+        const { data } = await axios.get('https://premiumm.flipbet.in/fancy/getVirtualBM?eventId=' + eventIds.toString());
+        Object.keys(data).forEach(function (key) {
+            //console.log(data[key].sky2);
+            const marketId = matches.find(mt => mt.eventId == key)?.marketId;
+            data[key] && redisdb.SetRedisEx('Fancy-' + marketId + '-virtual', data[key], 4)
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+const VRInterval = setIntervalAsync(async () => {
+    try {
+        const mdata = await redisdb.GetRedis('virtualMatches');
+        if (mdata) {
+            const tMatches = JSON.parse(mdata) || [];
+            const chunk = chunkArray(tMatches, 10);
+            for (const element of chunk) {
+                element.length && getVirtual(element);
+            }
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+}, 350);
 const chunkArray = (myArray, size) => {
     var results = [];
     while (myArray.length) {
