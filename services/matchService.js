@@ -125,10 +125,9 @@ adminService.insertMatchData = async (matches) => {
 adminService.getEventsData = async () => {
    return new Promise(async (resolve, reject) => {
       try {         
-         let eventData =await match.find().limit(1000).sort({'openDate':1}).lean().exec();
+         let eventData =await match.find().sort({'openDate':-1}).limit(1000).lean().exec();
          // console.log("eventData",eventData)
-         eventData = eventData.sort((a, b) => moment(b.openDate) - moment(a.openDate));
-         // console.log("eventdata is")
+         eventData = eventData.sort((a, b) => moment(b.openDate) - moment(a.openDate)); 
          resolve(eventData);
       } catch (err) {
          console.log(err)

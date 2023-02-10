@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const customerController = require("../controller/customerController");
+// const customerController = require("../controller/cu");
 // api for customer use
 router.get('/getDFancyBM/:marketId',customerController.getDFancyBM);
 router.get('/getSFancyBM/:marketId',customerController.getSFancyBM);
