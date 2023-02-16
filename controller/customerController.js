@@ -6,10 +6,14 @@ exports.getDFancyBM = async(req,res)=>{
         let ids = (req.params.marketId).split(',')
         // console.log("m",ids);
         let dFancy = await getMultiMarkets(ids,'Fancy-','-diamond')
-        let dBM = await getMultiMarkets(ids,'BM-','-diamond')
+        let data ={"Fancy":[],"BookMaker":[]}
+        for(let d of dFancy){
+            data.Fancy.push(d.data?.t3);
+            data.BookMaker.push(d.data?.t2);
+        }
         let result = {
             "message":"Diamond Result fetched",
-            "data":{"Fancy":dFancy,"BookMaker":dBM}
+            "data":data
         }
         return res.status(STATUS.OK).send(result)
     }catch(err){
@@ -111,6 +115,6 @@ const getMultiMarkets = async(arr,first,last)=>{
     for(let i=0;i<arr.length;i++){
         let data =JSON.parse(await redisdb.GetRedis(first + arr[i] + last))
         let getdata =data != null ? Array.isArray(data) ? result.push(data[0]):result.push(data): []
-    }
+    }    
     return result;
 }
