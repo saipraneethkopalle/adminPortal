@@ -70,7 +70,7 @@ const getActiveMatches =async()=>{
         let fancyMatches = activeMatches.filter(aMatches=>{if(aMatches.sportId == '4' && constants.type.includes(aMatches['type'])){
             // aMatches['FinalStatus']=true;
             return aMatches;}})
-        let virtualMatches = activeMatches.filter(aMatches=>{if(aMatches.sportId == '4' && aMatches.sportId.startsWith('100')){return aMatches;}}) 
+        let virtualMatches = activeMatches.filter(aMatches=>{if(aMatches.sportId == '4' && aMatches.eventId.startsWith('100')){return aMatches;}}) 
         
         // console.log("Matches",activeMatches.length,OddMatches.length,OddSktMatches.length,fancyMatches.length,virtualMatches.length);
         await redisdb.SetRedis("ActiveMatches",JSON.stringify(activeMatches));
