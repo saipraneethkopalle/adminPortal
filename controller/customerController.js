@@ -1,5 +1,7 @@
 const { STATUS } = require("../constants/Config");
 const redisdb = require("../constants/redis-db");
+const matchService = require("../services/matchService");
+const moment = require("moment");
 
 exports.getDFancyBM = async(req,res)=>{
     try{
@@ -117,4 +119,19 @@ const getMultiMarkets = async(arr,first,last)=>{
         let getdata =data != null ? Array.isArray(data) ? result.push(data[0]):result.push(data): []
     }    
     return result;
+}
+
+exports.customMatches = async(req,res)=>{
+    try{
+        let finalResult = await matchService.getEventDataBySportName({isActive:true,isResult:false});
+        finalResult = finalResult.map(dt => ({ ...dt, unixDate: moment(dt.openDate, 'MM/DD/YYYY hh:mm:ss A').unix() })).sort((a, b) => a.unixDate - b.unixDate);
+        
+        return res.status(STATUS.OK).send({
+            message:"Match details fetched",
+            data:finalResult,
+        })
+    }catch(err){
+        console.log("err",err);
+        return res.status(STATUS.BAD_REQUEST).send(err)
+    }
 }
