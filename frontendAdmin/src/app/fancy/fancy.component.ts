@@ -114,13 +114,18 @@ export class FancyComponent implements OnInit {
       this.oddsub2 = this.socket.getUpdate2MessageListner().subscribe((res: any) => {
         this.oddsType2 = res.message2['Type'];
         if (res.message2['data'].length > 0) {
-
           if (this.oddsType2 == 'Diamond') {
             // console.log("bookMaker",res.message2['data'][0].bm1)
             this.runnersList2 = res.message2['data'][0].bm1.reverse();
           }
           else if (this.oddsType2 == 'Virtual' || this.oddsType2 == 'Jdiamond') {
             this.runnersList2 = res.message2['data'][0].bm2.reverse();
+          }
+          else if (this.oddsType2 == 'Sky' || this.oddsType2 == 'Sk' || this.oddsType2 == 'Sky3') {
+            res.message2['data'] = res.message2['data'].filter((rs:any)=>{
+              rs.runner_odds = JSON.parse(rs.runner_odds);
+              return rs;})
+            this.runnersList2 = res.message2['data'][0].runner_odds;
           }
         }
       });
@@ -159,6 +164,7 @@ export class FancyComponent implements OnInit {
             // this.newFancies = [...datas].sort((a, b) => (a.srno > b.srno) ? 1 : -1);
           }
           else if (this.fancyProvider == 'sky') {
+            console.log("===",JSON.parse(resp.fancy['result'].data));
             let datas = JSON.parse(resp.fancy['result'].data);
             this.fancyList = datas.filter((resp:any) => {
               return resp.status != '18' && resp.status != '1' && resp.status != '14';
@@ -167,7 +173,8 @@ export class FancyComponent implements OnInit {
             //   return resp.status != '18' && resp.status != '1' && resp.status != '14';
             // });
           }
-          else if (this.fancyProvider == 'sk') {
+          else if (this.fancyProvider == 'sk' || this.fancyProvider == 'sky3') {
+            console.log("sk",resp.fancy['result'].data);
             this.fancyList = JSON.parse(resp.fancy['result'].data);
             // this.newFancies = JSON.parse(resp.fancy['result'].data)
           }

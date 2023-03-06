@@ -33,15 +33,18 @@
             </td>
             <td style="width:14%;"><select class="dr" style="width:120px;" (change)="changeOdds(item,$event)">
               <option value="diamond" [selected]="item['fancyProvider'] == 'diamond'">Diamond</option>
-              <option value="tiger" [selected]="item['fancyProvider'] == 'tiger'">Tiger</option>
+              <!-- <option value="tiger" [selected]="item['fancyProvider'] == 'tiger'">Tiger</option> -->
+              <option value="sky" [selected]="item['fancyProvider'] == 'sky'" >Sky</option>
               <option value="sky3" [selected]="item['fancyProvider'] == 'sky3'" >Sky3</option>
+              <option value="world" [selected]="item['fancyProvider'] == 'world'" >World</option>
 
             </select>
               <button type="button" (click)="updateProvider2(item)" class="btn btn-success uscore" style="width:120px;">Update Fancy</button>
             </td>
             <td ><select class="dr" (change)="changeOdds(item,$event)">
               <option value="diamond" [selected]="item['bmProvider'] == 'diamond'" >Diamond</option>
-              <option value="tiger" [selected]="item['bmProvider'] == 'tiger'">Tiger</option>
+              <!-- <option value="tiger" [selected]="item['bmProvider'] == 'tiger'">Tiger</option> -->
+              <option value="sky" [selected]="item['bmProvider'] == 'sky'">Sky</option>
               <option value="sky3" [selected]="item['bmProvider'] == 'sky3'">Sky3</option>
             </select>
               <button type="button" (click)="updateProvider3(item)" class="btn btn-success uscore">Update BM</button>
@@ -75,7 +78,7 @@
               </div>
             </td>
         </tr>
-      
+
     </table>
 </div>
 

@@ -46,23 +46,23 @@
            <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
          </tr>
         <tr *ngFor="let run of runnersList2;" style="font-size: 14px;height:60px;">
-          <td >{{run.nat}}</td>
-          <td scope="col" colspan="6" *ngIf="run.s == 'SUSPENDED'"
+          <td >{{run.runner_name}}</td>
+          <td scope="col" colspan="6" *ngIf="run.is_sus==1"
           style="background-color:#D7E8F4;text-align:center;width:200px;padding-left:10px;font-size:12px;">
-           <span class="sus"> {{run.s}}</span>
+           <span class="sus"> SUSPENDED</span>
           </td>
-          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          <td scope="col" colspan="3" *ngIf="run.is_sus==0"
             style="background-color: #d7e8f4;width:200px;">
             <dl style="float:right;margin:0;width:63px;height:38px;">
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.b3 | number:'1.0-1'}}</dd>
              <dd style="font-weight: normal;text-align:center;width:63px;height:40px;display:none;">{{run.b2 | number:'1.0-1'}}</dd>
-             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.b1 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.back | number:'1.0-1'}}</dd>
              </dl>
             </td>
-          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          <td scope="col" colspan="3" *ngIf="run.is_sus==0"
           style="background-color: #faa9ba;text-align: left;width:200px;">
           <dl style="margin:0;width:63px;height:38px;">
-            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.l1 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.lay | number:'1.0-1'}}</dd>
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l2 | number:'1.0-1'}}</dd>
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l3 | number:'1.0-1'}}</dd>
             </dl>
@@ -114,23 +114,23 @@
            <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
          </tr>
         <tr *ngFor="let run of runnersList2;" style="font-size: 14px;height:60px;">
-          <td >{{run.nat}}</td>
-          <td scope="col" colspan="6" *ngIf="run.s == 'SUSPENDED'"
+          <td >{{run.runner_name}}</td>
+          <td scope="col" colspan="6" *ngIf="run.is_sus==1"
           style="background-color:#D7E8F4;text-align:center;width:200px;padding-left:10px;font-size:12px;">
-           <span class="sus"> {{run.s}}</span>
+           <span class="sus"> SUSPENDED</span>
           </td>
-          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          <td scope="col" colspan="3" *ngIf="run.is_sus==0"
             style="background-color: #d7e8f4;width:200px;">
             <dl style="float:right;margin:0;width:63px;height:38px;">
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.b3 | number:'1.0-1'}}</dd>
              <dd style="font-weight: normal;text-align:center;width:63px;height:40px;display:none;">{{run.b2 | number:'1.0-1'}}</dd>
-             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.b1 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.back | number:'1.0-1'}}</dd>
              </dl>
             </td>
-          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          <td scope="col" colspan="3" *ngIf="run.is_sus==0"
           style="background-color: #faa9ba;text-align: left;width:200px;">
           <dl style="margin:0;width:63px;height:38px;">
-            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.l1 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.lay | number:'1.0-1'}}</dd>
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l2 | number:'1.0-1'}}</dd>
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l3 | number:'1.0-1'}}</dd>
             </dl>
@@ -173,23 +173,23 @@
            <th scope="col" colspan="3" style="text-align:left;padding-left:10px;font-size:12px;">Lay Details</th>
          </tr>
         <tr *ngFor="let run of runnersList2;" style="font-size: 14px;height:60px;">
-          <td >{{run.nat}}</td>
-          <td scope="col" colspan="6" *ngIf="run.s == 'SUSPENDED'"
+          <td >{{run.runner_name}}</td>
+          <td scope="col" colspan="6" *ngIf="run.is_sus==1"
           style="background-color:#D7E8F4;text-align:center;width:200px;padding-left:10px;font-size:12px;">
-           <span class="sus"> {{run.s}}</span>
+           <span class="sus"> SUSPENDED</span>
           </td>
-          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          <td scope="col" colspan="3" *ngIf="run.is_sus==0"
             style="background-color: #d7e8f4;width:200px;">
             <dl style="float:right;margin:0;width:63px;height:38px;">
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.b3 | number:'1.0-1'}}</dd>
              <dd style="font-weight: normal;text-align:center;width:63px;height:40px;display:none;">{{run.b2 | number:'1.0-1'}}</dd>
-             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.b1 | number:'1.0-1'}}</dd>
+             <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;"> {{run.back | number:'1.0-1'}}</dd>
              </dl>
             </td>
-          <td scope="col" colspan="3" *ngIf="run.s != 'SUSPENDED'"
+          <td scope="col" colspan="3" *ngIf="run.is_sus==0"
           style="background-color: #faa9ba;text-align: left;width:200px;">
           <dl style="margin:0;width:63px;height:38px;">
-            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.l1 | number:'1.0-1'}}</dd>
+            <dd style="font-weight: normal;text-align:center;border-radius:4px;width:63px;height:38px;border:1px solid;">{{run.lay | number:'1.0-1'}}</dd>
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l2 | number:'1.0-1'}}</dd>
             <dd style="font-weight: normal;text-align:center;width:63px;height:38px;display:none;">{{run.l3 | number:'1.0-1'}}</dd>
             </dl>
@@ -427,7 +427,7 @@
             </td>
          </tr>
       </tbody>
-      <tbody *ngIf="fancyProvider == 'sk'">
+      <tbody *ngIf="fancyProvider == 'sky3'">
          <tr *ngFor="let afancy of fancyList ; let i = index">
             <td>{{ i+1 }}</td>
             <td>{{ afancy.runner_name }}</td>

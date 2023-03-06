@@ -20,10 +20,10 @@
         <td></td>
         <td id="drop"><select id="selectProvider" formControlName="fancy">
           <option value="diamond" [selected]="providers.fancy=='diamond'">Diamond</option>
-            <option value="tiger" [selected]="providers.fancy=='tiger'" >Tiger</option>
+            <!-- <option value="tiger" [selected]="providers.fancy=='tiger'" >Tiger</option> -->
+            <option value="sky" [selected]="providers.fancy=='sky'">Sky</option>
             <option value="sky3" [selected]="providers.fancy=='sky3'">Sky3</option>
-
-
+            <option value="world" [selected]="providers.fancy=='world'">World</option>
           </select></td>
       </tr>
       <tr>
@@ -31,7 +31,8 @@
         <td></td>
         <td id="drop"><select id="selectProvider" formControlName="bookmaker">
           <option [selected]="providers.bookmaker=='diamond'" value="diamond">Diamond</option>
-          <option [selected]="providers.bookmaker=='tiger'" value="tiger">Tiger</option>
+          <!-- <option [selected]="providers.bookmaker=='tiger'" value="tiger">Tiger</option> -->
+          <option value="sky" [selected]="providers.bookmaker=='sky'">Sky</option>
           <option [selected]="providers.bookmaker=='sky3'" value="sky3">Sky3</option>
 
           </select></td>

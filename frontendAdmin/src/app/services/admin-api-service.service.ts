@@ -385,6 +385,7 @@ activeAllFancy(data:any, logs:any, eventId:any) {
   return this.http.post(url,sdata,{headers:this.headers})
 }
 getFancy(id:any, marketId:any, provider:any, status:any) {
+  provider = provider == 'sky3'? 'sk':provider
   const queryParam = `?marketId=${marketId}&provider=${provider}`;
   let queryParams1;
   if (status == 'All') {
