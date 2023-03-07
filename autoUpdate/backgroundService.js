@@ -24,9 +24,10 @@ process.on('uncaughtException', (err) => {
 // Adding matches from external api in db
 const addAllMatches =async()=>{
     try {
-        let oddsProvider = JSON.parse(await redisdb.GetRedis('providers'))!= null ? JSON.parse(await redisdb.GetRedis('providers')).odds:'betfair';
-        let fancyProvider = JSON.parse(await redisdb.GetRedis('providers'))!= null ? JSON.parse(await redisdb.GetRedis('providers')).fancy:'diamond';
-        let bmProvider = JSON.parse(await redisdb.GetRedis('providers'))!= null ? JSON.parse(await redisdb.GetRedis('providers')).bookmaker:'diamond';    
+	const {odds,fancy,bookmaker} = await redisdb.GetRedis('providers')
+        let oddsProvider = JSON.parse(odds)!= null ? JSON.parse(odds):'betfair';
+        let fancyProvider = JSON.parse(fancy)!= null ? JSON.parse(fancy):'diamond';
+        let bmProvider = JSON.parse(bookmaker)!= null ? JSON.parse(bookmaker):'diamond';    
         const { data: { result } } = await axios.get('http://172.105.51.41:3000/v1-api/match/getScoreMatchesCP');
         const matches = result.map(matchData => ({
             eventId: matchData.event_id, eventName: matchData.event_name,
@@ -70,14 +71,14 @@ const getActiveMatches =async()=>{
         let fancyMatches = activeMatches.filter(aMatches=>{if(aMatches.sportId == '4' && constants.type.includes(aMatches['type'])){
             // aMatches['FinalStatus']=true;
             return aMatches;}})
-        let virtualMatches = activeMatches.filter(aMatches=>{if(aMatches.sportId == '4' && aMatches.eventId.startsWith('100')){return aMatches;}}) 
+	   //let virtualMatches = activeMatches.filter(aMatches=>{if(aMatches.sportId == '4' && aMatches.eventId.startsWith('100')){return aMatches;}}) 
         
         // console.log("Matches",activeMatches.length,OddMatches.length,OddSktMatches.length,fancyMatches.length,virtualMatches.length);
         await redisdb.SetRedis("ActiveMatches",JSON.stringify(activeMatches));
         await redisdb.SetRedis("OddMatches",JSON.stringify(OddMatches));
         await redisdb.SetRedis("OddSktMatches",JSON.stringify(OddSktMatches));
         await redisdb.SetRedis("fancyMatches",JSON.stringify(fancyMatches));
-        await redisdb.SetRedis("virtualMatches",JSON.stringify(virtualMatches));
+        //await redisdb.SetRedis("virtualMatches",JSON.stringify(virtualMatches));
         return { status: 1, data: activeMatches }
     }catch(err){
         return { status: 0, error: err.message };
@@ -157,7 +158,7 @@ const oddsInterval = setIntervalAsync(async () => {
     catch (err) {
         // console.log("err2",err);
     }
-}, 350);
+}, 400);
 
 const getFancyData = async (marketIds) => {
     try {
@@ -178,17 +179,17 @@ const getFancyData = async (marketIds) => {
 }
 const getSky2Fancy = async (marketIds) => {
     try {
-        let skyFancyData =await axios.get('http://172.105.51.41:3000/v1-api/fancy/getSky2?marketId=' + marketIds.toString())
+        let skyFancyData =await axios.get('http://172.105.51.41:3000/v1-api/fancy/getSky3?marketId=' + marketIds.toString())
         skyFancyData = skyFancyData.data;
         Object.keys(skyFancyData).forEach(function (key) {
             // console.log('Fancy-' + key + '-sky2');
-            skyFancyData[key].sky2 && redisdb.SetRedisEx('Fancy-' + key + '-sky2', skyFancyData[key].sky2, 4)
+            //skyFancyData[key].sky2 && redisdb.SetRedisEx('Fancy-' + key + '-sky2', skyFancyData[key].sky2, 4)
             skyFancyData[key].sky3 && redisdb.SetRedisEx('Fancy-' + key + '-sk', skyFancyData[key].sky3, 4)
             skyFancyData[key].sky3b && redisdb.SetRedisEx('BM-' + key + '-sk', skyFancyData[key].sky3b, 4)
-            skyFancyData[key].john && redisdb.SetRedisEx('Fancy-' + key + '-jdiamond', skyFancyData[key].john, 4)
-            skyFancyData[key].tiger && redisdb.SetRedisEx('Fancy-' + key + '-tiger', skyFancyData[key].tiger, 4)
-            skyFancyData[key].tigerb && redisdb.SetRedisEx('BM-' + key + '-tiger', skyFancyData[key].tigerb, 4)
-            skyFancyData[key].tigerr && redisdb.SetRedisEx('Result-' + key + '-tiger', skyFancyData[key].tigerr, 4)
+           // skyFancyData[key].john && redisdb.SetRedisEx('Fancy-' + key + '-jdiamond', skyFancyData[key].john, 4)
+           // skyFancyData[key].tiger && redisdb.SetRedisEx('Fancy-' + key + '-tiger', skyFancyData[key].tiger, 4)
+           // skyFancyData[key].tigerb && redisdb.SetRedisEx('BM-' + key + '-tiger', skyFancyData[key].tigerb, 4)
+           // skyFancyData[key].tigerr && redisdb.SetRedisEx('Result-' + key + '-tiger', skyFancyData[key].tigerr, 4)
         });
     }
     catch (err) {
@@ -210,7 +211,7 @@ setIntervalAsync(async () => {
     catch (err) {
         // console.log("err1",err);
     }
-}, 350);
+}, 500);
 setIntervalAsync(async () => {
     try {
         const fancymatches = await redisdb.GetRedis('fancyMatches');
@@ -225,37 +226,8 @@ setIntervalAsync(async () => {
     catch (err) {
         // console.log("err1",err);
     }
-}, 350);
+}, 500);
 
-const getVirtual = async (matches) => {
-    try {
-        const eventIds = matches.map(dt => (dt.eventId));
-        const { data } = await axios.get('https://premiumm.flipbet.in/fancy/getVirtualBM?eventId=' + eventIds.toString());
-        Object.keys(data).forEach(function (key) {
-            //console.log(data[key].sky2);
-            const marketId = matches.find(mt => mt.eventId == key)?.marketId;
-            data[key] && redisdb.SetRedisEx('Fancy-' + marketId + '-virtual', data[key], 4)
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-}
-const VRInterval = setIntervalAsync(async () => {
-    try {
-        const mdata = await redisdb.GetRedis('virtualMatches');
-        if (mdata) {
-            const tMatches = JSON.parse(mdata) || [];
-            const chunk = chunkArray(tMatches, 10);
-            for (const element of chunk) {
-                element.length && getVirtual(element);
-            }
-        }
-    }
-    catch (err) {
-        console.log(err);
-    }
-}, 350);
 const chunkArray = (myArray, size) => {
     var results = [];
     while (myArray.length) {

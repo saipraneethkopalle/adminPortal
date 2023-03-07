@@ -127,7 +127,8 @@ adminService.getEventsData = async () => {
       try {         
          let eventData =await match.find().sort({'openDate':-1}).limit(1000).lean().exec();
          // console.log("eventData",eventData)
-         eventData = eventData.sort((a, b) => moment(b.openDate) - moment(a.openDate)); 
+         eventData = eventData.sort((a, b) => moment(b.openDate) - moment(a.openDate));
+         // console.log("eventdata is")
          resolve(eventData);
       } catch (err) {
          console.log(err)

@@ -188,7 +188,8 @@ const result = await redisdb.GetRedis('Fancy-' + marketId + '-' + fancyProvider)
 
 const getBookM = async (bmProvider, eventId, marketId) => {
     try{
-    const fetch = (bmProvider == 'diamond' || bmProvider == 'jdiamond' || bmProvider == 'virtual' || bmProvider == 'world' || bmProvider == 'bull' || bmProvider == 'sk' || bmProvider == 'tiger') ? 'Fancy-' + marketId + '-' + bmProvider : 'BM-' + marketId + '-' + bmProvider;
+    bmProvider = bmProvider =='sky3' ? 'sk':bmProvider
+    const fetch = (bmProvider == 'diamond' || bmProvider == 'jdiamond' || bmProvider == 'virtual' || bmProvider == 'world' || bmProvider == 'bull' || bmProvider == 'tiger') ? 'Fancy-' + marketId + '-' + bmProvider : 'BM-' + marketId + '-' + bmProvider;
     const res = await redisdb.GetRedis(fetch);
     let resp = JSON.parse(res);
     if (resp == "null" || resp == null) {

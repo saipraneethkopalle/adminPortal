@@ -1,5 +1,6 @@
 const { STATUS } = require("../constants/Config");
 const redisdb = require("../constants/redis-db");
+const axios = require("axios");
 const matchService = require("../services/matchService");
 const moment = require("moment");
 
@@ -26,13 +27,43 @@ exports.getDFancyBM = async(req,res)=>{
 exports.getSFancyBM = async(req,res)=>{
     try{ 
         let ids = (req.params.marketId).split(',')
+	let skyOdds = await getMultiMarkets(ids,'Odds-','-sky')
         let sFancy = await getMultiMarkets(ids,'Fancy-','-sky')
-        let s3Fancy = await getMultiMarkets(ids,'Fancy-','-sk')
-        let sky2 = await getMultiMarkets(ids,'Fancy-','-sky2')
-        let fancy ={"sky":sFancy,"sky3":s3Fancy,"sky2":sky2}
+        //let s3Fancy = await getMultiMarkets(ids,'Fancy-','-sk')
+       // let sky2 = await getMultiMarkets(ids,'Fancy-','-sky2')
+	//   console.log("sky3===",s3Fancy);
+		sFancy = sFancy[0]?.filter(resp=>{
+		if(resp.status != '18' && resp.status != '1' && resp.status != '14'){
+			return resp
+		}
+		})
+        let fancy ={"sky":sFancy}
+	//   console.log("sky count==",fancy.sky.length)
         let sBM =await getMultiMarkets(ids,'BM-','-sky')
+       // let s3BM = await getMultiMarkets(ids,'BM-','-sk')
+        let bm = {"sky":sBM}
+        let result = {
+            "message":"Sky Result fetched",
+            "data":{"Fancy":fancy,"BookMaker":bm,"Odds":skyOdds}
+	    //"data":{"Fancy":fancy}
+        }
+        return res.status(STATUS.OK).send(result)
+    }catch(err){
+        return res.status(STATUS.BAD_REQUEST).send(err)
+    }
+}
+exports.getS3FancyBM = async(req,res)=>{
+    try{
+        let ids = (req.params.marketId).split(',')
+        //let skyOdds = await getMultiMarkets(ids,'Odds-','-sky')
+        //let sFancy = await getMultiMarkets(ids,'Fancy-','-sky')
+        let s3Fancy = await getMultiMarkets(ids,'Fancy-','-sk')
+       // let sky2 = await getMultiMarkets(ids,'Fancy-','-sky2')
+        //   console.log("sky3===",s3Fancy);
+        let fancy ={"sky3":s3Fancy}
+       // let sBM =await getMultiMarkets(ids,'BM-','-sky')
         let s3BM = await getMultiMarkets(ids,'BM-','-sk')
-        let bm = {"sky":sBM,"sky3":s3BM}
+        let bm = {"sky3":s3BM}
         let result = {
             "message":"Sky Result fetched",
             "data":{"Fancy":fancy,"BookMaker":bm}
@@ -116,7 +147,8 @@ const getMultiMarkets = async(arr,first,last)=>{
     let result=[];
     for(let i=0;i<arr.length;i++){
         let data =JSON.parse(await redisdb.GetRedis(first + arr[i] + last))
-        let getdata =data != null ? Array.isArray(data) ? result.push(data[0]):result.push(data): []
+	  
+        let getdata =data != null ? Array.isArray(data) ? result.push(data):result.push(data): []
     }    
     return result;
 }

@@ -5,6 +5,7 @@ const customerController = require("../controller/customerController");
 // api for customer use
 router.get('/getDFancyBM/:marketId',customerController.getDFancyBM);
 router.get('/getSFancyBM/:marketId',customerController.getSFancyBM);
+router.get('/getS3FancyBM/:marketId',customerController.getS3FancyBM);
 router.get('/getWFancyBM/:marketId',customerController.getWFancyBM);
 router.get('/getRyan/:marketId',customerController.getRyan);
 router.get('/getTiger/:marketId',customerController.getTiger);

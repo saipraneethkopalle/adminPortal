@@ -641,7 +641,7 @@ exports.setFancyStatus = async (req, res) => {
 exports.getProviderFancy = async (req, res, next) => {
   try {
       const result = await redisdb.GetRedis('Fancy-' + req.query.marketId + '-' + req.query.provider);
-      // console.log("res",result);
+     // console.log("res",result);
       if (result != null && result != 'null') {
           res.status(STATUS.OK).send({
               message: 'Data Found!',
@@ -831,6 +831,7 @@ exports.getBookM = async (req, res) => {
 
       const provider = mData.bmProvider;
       let fetch = (provider == 'diamond' || provider == 'jdiamond' || provider == 'virtual' || provider == 'world' || provider == 'bull') ? 'Fancy' : 'BM';
+      
       const result = await redisdb.GetRedis(fetch + '-' + mData.marketId + '-' + provider);
       if (result != 'null' && result != null) {
           let results = JSON.parse(result);
